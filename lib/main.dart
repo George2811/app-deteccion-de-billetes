@@ -1,5 +1,6 @@
+import 'package:counterfeit_detector/ui/views/login.dart';
 import 'package:flutter/material.dart';
-import 'package:counterfeit_detector/ui/widgets/bottom_navbar.dart';
+//import 'package:counterfeit_detector/ui/widgets/bottom_navbar.dart';
 
 void main() {
   runApp(const MainApp());
@@ -11,7 +12,8 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: BottomNavBar(),
+      //home: BottomNavBar(),
+      home: LoginView(),
     );
   }
 }
