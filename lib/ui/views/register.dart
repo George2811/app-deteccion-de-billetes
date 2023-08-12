@@ -1,3 +1,5 @@
+import 'package:counterfeit_detector/ui/views/control.dart';
+import 'package:counterfeit_detector/ui/views/home.dart';
 import 'package:counterfeit_detector/ui/views/login.dart';
 import 'package:flutter/material.dart';
 
@@ -26,11 +28,11 @@ class _RegisterViewState extends State<RegisterView> {
               height: 300,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage("assets/cover.jpg"),
+                  image: const AssetImage("assets/cover.jpg"),
                   fit: BoxFit.cover,
                   colorFilter: ColorFilter.mode(
                     Colors.black.withOpacity(0.7), // Ajusta el nivel de opacidad aquí
-                    BlendMode.darken, // El modo de mezcla, puedes ajustarlo según tus necesidades
+                    BlendMode.darken,
                   ),
                 ),
               ),
@@ -67,12 +69,8 @@ class _RegisterViewState extends State<RegisterView> {
                 children: [
                   TextFormField(
                     controller: _emailController,
-                    cursorColor: const Color.fromARGB(255, 1, 24, 7),
                     decoration: InputDecoration(
                       labelText: "Correo",
-                      labelStyle: const TextStyle(
-                        color: Color.fromARGB(255, 1, 24, 7),
-                      ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(18),
                       ),
@@ -88,12 +86,8 @@ class _RegisterViewState extends State<RegisterView> {
                   const SizedBox(height: 25),
                   TextFormField(
                     controller: _passwordController,
-                    cursorColor: const Color.fromARGB(255, 1, 24, 7),                  
                     decoration: InputDecoration(
                       labelText: "Contraseña",
-                      labelStyle: const TextStyle(
-                        color: Color.fromARGB(255, 1, 24, 7),
-                      ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(18),
                       ),
@@ -109,12 +103,8 @@ class _RegisterViewState extends State<RegisterView> {
                   const SizedBox(height: 25),
                   TextFormField(
                     controller: _password2Controller,
-                    cursorColor: const Color.fromARGB(255, 1, 24, 7),                  
                     decoration: InputDecoration(
                       labelText: "Repite tu contraseña",
-                      labelStyle: const TextStyle(
-                        color: Color.fromARGB(255, 1, 24, 7),
-                      ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(18),
                       ),
@@ -138,7 +128,9 @@ class _RegisterViewState extends State<RegisterView> {
                           borderRadius: BorderRadius.circular(18),
                         ),
                       ),
-                      onPressed: (){},
+                      onPressed: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const ControlView()));
+                      },
                       child: const Text(
                         "Registrar",
                         style: TextStyle(

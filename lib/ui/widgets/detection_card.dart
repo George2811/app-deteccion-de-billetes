@@ -33,7 +33,7 @@ class DetectionCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
-                      "Deteccion de billetes",
+                      "Detector de billetes",
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,

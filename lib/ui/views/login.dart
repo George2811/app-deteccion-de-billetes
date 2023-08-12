@@ -1,3 +1,4 @@
+import 'package:counterfeit_detector/ui/views/control.dart';
 import 'package:counterfeit_detector/ui/views/home.dart';
 import 'package:counterfeit_detector/ui/views/register.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,8 @@ class _LoginViewState extends State<LoginView> {
   //final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+
+  bool passenable = true;
 
 
   @override
@@ -75,12 +78,8 @@ class _LoginViewState extends State<LoginView> {
                 children: [
                   TextFormField(
                     controller: _emailController,
-                    cursorColor: const Color.fromARGB(255, 1, 24, 7),
                     decoration: InputDecoration(
                       labelText: "Correo",
-                      labelStyle: const TextStyle(
-                        color: Color.fromARGB(255, 1, 24, 7),
-                      ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(18),
                       ),
@@ -96,11 +95,15 @@ class _LoginViewState extends State<LoginView> {
                   const SizedBox(height: 25),
                   TextFormField(
                     controller: _passwordController,
-                    cursorColor: const Color.fromARGB(255, 1, 24, 7),                  
+                    obscureText: passenable,
                     decoration: InputDecoration(
                       labelText: "Contraseña",
-                      labelStyle: const TextStyle(
-                        color: Color.fromARGB(255, 1, 24, 7),
+                      suffixIcon: IconButton(
+                        icon: Icon(passenable== true? Icons.remove_red_eye : Icons.visibility_off, size: 20),
+                        splashRadius: 15,
+                        onPressed: (){
+                          setState(() => passenable = !passenable);
+                        },
                       ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(18),
@@ -127,7 +130,7 @@ class _LoginViewState extends State<LoginView> {
                       ),
                       onPressed: (){
                         // En verdad debe redirigir a una vista qye tenga el bottom_navbar, ya q ese gestiona todo
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeView()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const ControlView()));
                       },
                       child: const Text(
                         "Ingresar",

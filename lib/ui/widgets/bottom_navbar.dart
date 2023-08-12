@@ -1,5 +1,6 @@
 import 'package:counterfeit_detector/ui/views/guide.dart';
 import 'package:counterfeit_detector/ui/views/home.dart';
+import 'package:counterfeit_detector/ui/views/select_currency.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
@@ -11,7 +12,7 @@ class BottomNavBar extends StatelessWidget {
     List<Widget> _buildScreens() {
       return [
         const HomeView(),
-        const GuideView(),
+        const SelectCurrency(),
         const GuideView()
       ];
     }

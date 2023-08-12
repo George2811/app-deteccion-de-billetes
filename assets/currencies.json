@@ -1,0 +1,66 @@
+{
+    "soles":[
+        {
+          "name":"Marca de agua",
+          "description":"Impresión traslucida ara identificar la originalidad del billete",
+          "img":""
+        },
+        {
+          "name":"Fibrillas",
+          "description":"Impresión traslucida ara identificar la originalidad del billete",
+          "img":""
+        },
+        {
+          "name":"Impresiones Fluorecentes",
+          "description":"Impresión traslucida ara identificar la originalidad del billete",
+          "img":""
+        },
+        {
+          "name":"Impresiones Fluorecentes",
+          "description":"Impresión traslucida ara identificar la originalidad del billete",
+          "img":""
+        },
+        {
+          "name":"Impresiones Fluorecentes",
+          "description":"Impresión traslucida ara identificar la originalidad del billete",
+          "img":""
+        },
+        {
+          "name":"Impresiones Fluorecentes",
+          "description":"Impresión traslucida ara identificar la originalidad del billete",
+          "img":""
+        }
+    ],
+    "dolares":[
+        {
+          "name":"Marca de agua",
+          "description":"Impresión traslucida ara identificar la originalidad del billete",
+          "img":""
+        },
+        {
+          "name":"Fibrillas",
+          "description":"Impresión traslucida ara identificar la originalidad del billete",
+          "img":""
+        },
+        {
+          "name":"Impresiones Fluorecentes",
+          "description":"Impresión traslucida ara identificar la originalidad del billete",
+          "img":""
+        },
+        {
+          "name":"Impresiones Fluorecentes",
+          "description":"Impresión traslucida ara identificar la originalidad del billete",
+          "img":""
+        },
+        {
+          "name":"Impresiones Fluorecentes",
+          "description":"Impresión traslucida ara identificar la originalidad del billete",
+          "img":""
+        },
+        {
+          "name":"Impresiones Fluorecentes",
+          "description":"Impresión traslucida ara identificar la originalidad del billete",
+          "img":""
+        }
+    ]
+ }

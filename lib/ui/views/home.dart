@@ -44,7 +44,7 @@ class HomeView extends StatelessWidget {
             description: "Moneda Nacional del Perú",
             img: "assets/soles.jpg",
             flag: "assets/peru_flag.png",
-            symbol: "S/."
+            symbol: "S/"
           ),
           const SizedBox(height: 14),
           const CurrencyCard(
@@ -55,7 +55,7 @@ class HomeView extends StatelessWidget {
             symbol: "\$"
           ),
         ]
-      )
+      ),
     );
   }
 }

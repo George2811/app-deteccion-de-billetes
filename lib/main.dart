@@ -11,9 +11,19 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       //home: BottomNavBar(),
-      home: LoginView(),
+      //debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        textSelectionTheme: const TextSelectionThemeData(
+          cursorColor: Color.fromARGB(255, 1, 24, 7),
+        ),
+        inputDecorationTheme: const InputDecorationTheme(
+          floatingLabelStyle: TextStyle(color: Color.fromARGB(255, 1, 24, 7)),
+          suffixIconColor: Color.fromARGB(255, 1, 24, 7),
+        ),
+      ),
+      home: const LoginView(),
     );
   }
 }
