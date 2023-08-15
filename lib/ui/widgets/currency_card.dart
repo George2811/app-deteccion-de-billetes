@@ -1,3 +1,4 @@
+import 'package:counterfeit_detector/ui/views/characteristics.dart';
 import 'package:counterfeit_detector/ui/views/guide.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +20,7 @@ class CurrencyCard extends StatelessWidget {
       child: InkWell(
         onTap: (){
           // Función para redirigirlos a la vista Guía (hay BUG)
-          Navigator.push(context, MaterialPageRoute(builder: (context) => const GuideView()));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => const CharacteristicsView()));
         },
         child: SizedBox(
           width: 300,
