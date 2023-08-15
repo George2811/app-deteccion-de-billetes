@@ -2,65 +2,110 @@
     "soles":[
         {
           "name":"Marca de agua",
-          "description":"Impresión traslucida ara identificar la originalidad del billete",
-          "img":""
+          "description":"La marca de agua es visible sólo al trasluz, se aprecia al personaje principal, un triángulo de fondo claro que contiene puntos oscuros y la denominación en números.",
+          "img":"http://multimedia.bcrp.gob.pe/docs/billetes/images/100-marca-de-agua.gif",
+          "amount": 100,
+          "edition": "2021"
         },
         {
-          "name":"Fibrillas",
-          "description":"Impresión traslucida ara identificar la originalidad del billete",
-          "img":""
+          "name":"Hilo de seguridad intersaliente",
+          "description":"Hilo de seguridad con movimiento de anillos, que cambian de color fucsia a verde y el texto 100 BCRP calado. El hilo contiene elementos magnéticos por lo que es detectable por máquina.",
+          "img":"http://multimedia.bcrp.gob.pe/docs/billetes/images/100-hilo-de-seguridad.gif",
+          "amount": 100,
+          "edition": "2021"
         },
         {
-          "name":"Impresiones Fluorecentes",
-          "description":"Impresión traslucida ara identificar la originalidad del billete",
-          "img":""
+          "name":"Tinta que cambia de color",
+          "description":"Elemento denominado Spark Live, cambia de color fucsia a verde y en el fondo se aprecia imágenes en movimiento. También se aprecia un diseño geométrico fijo y la denominación en números.",
+          "img":"http://multimedia.bcrp.gob.pe/docs/billetes/images/100-tinta.gif",
+          "amount": 100,
+          "edition": "2021"
         },
         {
-          "name":"Impresiones Fluorecentes",
-          "description":"Impresión traslucida ara identificar la originalidad del billete",
-          "img":""
+          "name":"Imagen latente",
+          "description":"Se observa la denominación en posición tangencial a una fuente de luz. Dependiendo del ángulo de observación se aprecian dos tonalidades: una oscura y otra clara.",
+          "img":"http://multimedia.bcrp.gob.pe/docs/billetes/images/100-imagen-latente.gif",
+          "amount": 100,
+          "edition": "2021"
         },
         {
-          "name":"Impresiones Fluorecentes",
-          "description":"Impresión traslucida ara identificar la originalidad del billete",
-          "img":""
+          "name":"Marca de agua",
+          "description":"La marca de agua es visible solo al trasluz, se aprecia al personaje principal, un triángulo de fondo claro que contiene puntos oscuros y la denominación en números.",
+          "img":"http://multimedia.bcrp.gob.pe/temp/billetes-2022/images/20-marca-de-agua.gif",
+          "amount": 20,
+          "edition": "2021"
         },
         {
-          "name":"Impresiones Fluorecentes",
-          "description":"Impresión traslucida ara identificar la originalidad del billete",
-          "img":""
+          "name":"Hilo de seguridad intersaliente",
+          "description":"Hilo de seguridad con figuras en movimiento, cambio de color verde a azul y el texto 20 BCRP calado. El hilo contiene elementos magnéticos por lo que es detectable por máquina.",
+          "img":"http://multimedia.bcrp.gob.pe/temp/billetes-2022/images/20-hilo-de-seguridad.gif",
+          "amount": 20,
+          "edition": "2021"
+        },
+        {
+          "name":"Tinta que cambia de color",
+          "description":"Elemento denominado Spark Live, cambia de color verde a azul y en el fondo se aprecia imágenes en movimiento. También se aprecia un diseño geométrico fijo y la denominación en números.",
+          "img":"http://multimedia.bcrp.gob.pe/temp/billetes-2022/images/20-tinta.gif",
+          "amount": 20,
+          "edition": "2021"
+        },
+        {
+          "name":"Imagen latente",
+          "description":"Se observa la denominación en posición tangencial a una fuente de luz. Dependiendo del ángulo de observación se aprecian dos tonalidades: una oscura y otra clara.",
+          "img":"http://multimedia.bcrp.gob.pe/temp/billetes-2022/images/20-imagen-latente.gif",
+          "amount": 20,
+          "edition": "2021"
         }
     ],
     "dolares":[
         {
+          "name":"Hilo de seguridad",
+          "description":"Sostenga el billete al trasluz para ver un hilo incrustado que discurre verticalmente a la izquierda del retrato. El hilo lleva impresas las letras USA y el número 100 de forma alternada y es visible desde ambos lados del billete. A la luz ultravioleta, el hilo adquiere un color rosado.",
+          "img":"https://www.uscurrency.gov/sites/default/files/styles/unscaled/public/denominations/hundred2013_security_thread.webp?itok=fSN_CM46",
+          "amount": 100,
+          "edition": "2013"
+        },
+        {
+          "name":"Cinta de seguridad 3D",
+          "description":"Inclina la nota hacia delante y hacia atrás mientras te concentras en la cinta azul. Verás que las campanas cambian a 100 a medida que se mueven. Cuando inclinas la nota hacia delante y hacia atrás, las campanas y los 100 se mueven de lado a lado. Si lo inclinas de lado a lado, se mueven hacia arriba y hacia abajo. La cinta está entretejida en el papel, no impresa en él.",
+          "img":"https://www.uscurrency.gov/sites/default/files/styles/unscaled/public/denominations/hundred2013_securityribbon.webp?itok=s3KqmJDV",
+          "amount": 100,
+          "edition": "2013"
+        },
+        {
+          "name":"Campana en el tintero",
+          "description":"Incline el billete para ver cómo la campana del tintero de cobre cambia de color, del cobre al verde, un efecto que hace que la campana parezca aparecer y desaparecer dentro del tintero.",
+          "img":"https://www.uscurrency.gov/sites/default/files/styles/unscaled/public/denominations/hundred2013_bell.webp?itok=NEgNTJ85",
+          "amount": 100,
+          "edition": "2013"
+        },
+        {
           "name":"Marca de agua",
-          "description":"Impresión traslucida ara identificar la originalidad del billete",
-          "img":""
+          "description":"Sostén el billete a la luz y busca una imagen tenue de Benjamin Franklin en el espacio en blanco a la derecha del retrato. La imagen es visible desde ambos lados del billete.",
+          "img":"https://www.uscurrency.gov/sites/default/files/styles/unscaled/public/denominations/hundred2013_showwatermark.webp?itok=U7r6-4Jz",
+          "amount": 100,
+          "edition": "2013"
         },
         {
-          "name":"Fibrillas",
-          "description":"Impresión traslucida ara identificar la originalidad del billete",
-          "img":""
+          "name":"Hilo de seguridad",
+          "description":"Sostenga el billete al trasluz para ver un hilo incrustado que discurre verticalmente a la izquierda del retrato.  El hilo lleva impreso el texto USA TWENTY y una banderita en forma alternada y es visible desde ambos lados del billete.  El hilo brilla en verde cuando se ilumina con luz ultravioleta.",
+          "img":"https://www.uscurrency.gov/sites/default/files/styles/unscaled/public/denominations/twenty2003_security_thread.webp?itok=qvqiKBLT",
+          "amount": 20,
+          "edition": "2003"
         },
         {
-          "name":"Impresiones Fluorecentes",
-          "description":"Impresión traslucida ara identificar la originalidad del billete",
-          "img":""
+          "name":"Marca de agua",
+          "description":"Sostén el billete a la luz y busca una imagen tenue del presidente Jackson en el espacio en blanco a la derecha del retrato.  La imagen es visible desde ambos lados del billete.",
+          "img":"https://www.uscurrency.gov/sites/default/files/styles/unscaled/public/denominations/twenty2003_watermark.webp?itok=oaKd5e4S",
+          "amount": 20,
+          "edition": "2003"
         },
         {
-          "name":"Impresiones Fluorecentes",
-          "description":"Impresión traslucida ara identificar la originalidad del billete",
-          "img":""
-        },
-        {
-          "name":"Impresiones Fluorecentes",
-          "description":"Impresión traslucida ara identificar la originalidad del billete",
-          "img":""
-        },
-        {
-          "name":"Impresiones Fluorecentes",
-          "description":"Impresión traslucida ara identificar la originalidad del billete",
-          "img":""
+          "name":"Tinta que cambia de color",
+          "description":"Incline el billete para ver que el número 20 de la esquina inferior derecha del anverso pasa de cobre a verde.",
+          "img":"https://www.uscurrency.gov/sites/default/files/styles/unscaled/public/denominations/twenty2003_colorshift.webp?itok=OB2UINLv",
+          "amount": 20,
+          "edition": "2003"
         }
     ]
  }
