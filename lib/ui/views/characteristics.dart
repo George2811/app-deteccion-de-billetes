@@ -1,5 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show rootBundle;
+import 'dart:convert';
 
 class CharacteristicsView extends StatefulWidget {
   const CharacteristicsView({super.key});
@@ -9,6 +11,22 @@ class CharacteristicsView extends StatefulWidget {
 }
 
 class _CharacteristicsViewState extends State<CharacteristicsView> {
+  List<dynamic> currencies = []; // Lista para almacenar los datos del JSON
+
+  Future<void> loadCurrencies() async {
+    String jsonText = await rootBundle.loadString('assets/currencies.json');
+    setState(() {
+      currencies = json.decode(jsonText);
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    loadCurrencies(); // Cargar los datos del JSON cuando se inicializa el widget
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
