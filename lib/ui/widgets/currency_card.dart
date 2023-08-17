@@ -1,15 +1,14 @@
 import 'package:counterfeit_detector/ui/views/characteristics.dart';
-import 'package:counterfeit_detector/ui/views/guide.dart';
 import 'package:flutter/material.dart';
 
 class CurrencyCard extends StatelessWidget {
-  final String? title;
+  final String title;
   final String? description;
   final String? img;
   final String? flag;
   final String? symbol;
 
-  const CurrencyCard({Key? key, this.title, this.description, this.img, this.flag, this.symbol}) : super(key: key);
+  const CurrencyCard({Key? key, this.title="Titulo", this.description, this.img, this.flag, this.symbol}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +19,7 @@ class CurrencyCard extends StatelessWidget {
       child: InkWell(
         onTap: (){
           // Función para redirigirlos a la vista Guía (hay BUG)
-          Navigator.push(context, MaterialPageRoute(builder: (context) => const CharacteristicsView()));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => CharacteristicsView(category: title,)));
         },
         child: SizedBox(
           width: 300,
@@ -49,7 +48,7 @@ class CurrencyCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        title?? "Título",
+                        title,
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 16,

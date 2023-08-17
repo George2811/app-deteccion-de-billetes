@@ -4,25 +4,32 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'dart:convert';
 
 class CharacteristicsView extends StatefulWidget {
-  const CharacteristicsView({super.key});
+
+  final String category;
+  const CharacteristicsView({super.key, this.category = ""});
 
   @override
   State<CharacteristicsView> createState() => _CharacteristicsViewState();
 }
 
 class _CharacteristicsViewState extends State<CharacteristicsView> {
-  List<dynamic> currencies = []; // Lista para almacenar los datos del JSON
+  Map<String, dynamic> currencyData = {};  // Lista para almacenar los datos del JSON
+  List characteristics = [];
 
   Future<void> loadCurrencies() async {
     String jsonText = await rootBundle.loadString('assets/currencies.json');
+    
     setState(() {
-      currencies = json.decode(jsonText);
+      currencyData = jsonDecode(jsonText);
+      characteristics = currencyData[widget.category];
     });
+
+    //print(currencyData.keys.elementAt(0));
+    //print(currencyData[widget.category]);
   }
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     loadCurrencies(); // Cargar los datos del JSON cuando se inicializa el widget
   }
@@ -33,9 +40,9 @@ class _CharacteristicsViewState extends State<CharacteristicsView> {
       appBar: AppBar(
             elevation: 0,
             backgroundColor: Colors.transparent,
-            title: const Text(
-              "Soles",
-              style: TextStyle(
+            title: Text(
+              widget.category,
+              style: const TextStyle(
                 color: Colors.black54,
                 fontWeight:  FontWeight.bold 
               ),
@@ -50,16 +57,13 @@ class _CharacteristicsViewState extends State<CharacteristicsView> {
             ),
           ),
       body: CarouselSlider(
-        options: CarouselOptions(height: 500.0, viewportFraction: 0.9),
-        items: [1,2,3,4,5].map((i) {
+        options: CarouselOptions(height: 540.0, viewportFraction: 0.9),
+        items: characteristics.map((e) {
           return Builder(
             builder: (BuildContext context) {
               return Container(
                 width: MediaQuery.of(context).size.width,
-                margin: const EdgeInsets.symmetric(horizontal: 0.0),
-                decoration: const BoxDecoration(
-                  //color: Colors.amber
-                ),
+                margin: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: Card(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
@@ -74,7 +78,7 @@ class _CharacteristicsViewState extends State<CharacteristicsView> {
                         child: SizedBox(
                           width: MediaQuery.of(context).size.width,
                           child: Image.network(
-                            "http://multimedia.bcrp.gob.pe/docs/billetes/images/100-hilo-de-seguridad.gif",
+                            e['img']?? "http://multimedia.bcrp.gob.pe/docs/billetes/images/100-hilo-de-seguridad.gif",
                             fit: BoxFit.fitWidth,
                           )
                         ),
@@ -83,9 +87,9 @@ class _CharacteristicsViewState extends State<CharacteristicsView> {
                       Container(
                         margin: const EdgeInsets.symmetric(horizontal: 20),
                         alignment: Alignment.centerLeft,
-                        child: const Text(
-                          "Hilo de seguridad intersaliente",
-                          style: TextStyle(
+                        child: Text(
+                          e['name']?? "Titulo",
+                          style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
                           ),
@@ -94,10 +98,10 @@ class _CharacteristicsViewState extends State<CharacteristicsView> {
                       const SizedBox(height: 20,),
                       Container(
                         margin: const EdgeInsets.symmetric(horizontal: 20),
-                        child: const Text(
-                          "Hilo de seguridad con movimiento de anillos, que cambian de color fucsia a verde y el texto 100 BCRP calado. El hilo contiene elementos magnéticos por lo que es detectable por máquina.",
+                        child: Text(
+                          e['description']?? "Hilo de seguridad con movimiento de anillos, que cambian de color fucsia a verde y el texto 100 BCRP calado. El hilo contiene elementos magnéticos por lo que es detectable por máquina.",
                           textAlign: TextAlign.justify,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.grey,
                           ),
                         ),

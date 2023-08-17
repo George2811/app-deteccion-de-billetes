@@ -1,5 +1,5 @@
 {
-    "soles":[
+    "Soles":[
         {
           "name":"Marca de agua",
           "description":"La marca de agua es visible sólo al trasluz, se aprecia al personaje principal, un triángulo de fondo claro que contiene puntos oscuros y la denominación en números.",
@@ -57,7 +57,7 @@
           "edition": "2021"
         }
     ],
-    "dolares":[
+    "Dólares":[
         {
           "name":"Hilo de seguridad",
           "description":"Sostenga el billete al trasluz para ver un hilo incrustado que discurre verticalmente a la izquierda del retrato. El hilo lleva impresas las letras USA y el número 100 de forma alternada y es visible desde ambos lados del billete. A la luz ultravioleta, el hilo adquiere un color rosado.",
@@ -67,7 +67,7 @@
         },
         {
           "name":"Cinta de seguridad 3D",
-          "description":"Inclina la nota hacia delante y hacia atrás mientras te concentras en la cinta azul. Verás que las campanas cambian a 100 a medida que se mueven. Cuando inclinas la nota hacia delante y hacia atrás, las campanas y los 100 se mueven de lado a lado. Si lo inclinas de lado a lado, se mueven hacia arriba y hacia abajo. La cinta está entretejida en el papel, no impresa en él.",
+          "description":"Inclina la nota hacia delante y hacia, verás que las campanas cambian a 100 a medida que se mueven. Cuando inclinas la nota hacia delante y hacia atrás, las campanas y los 100 se mueven de lado a lado. Si lo inclinas de lado a lado, se mueven hacia arriba y hacia abajo. La cinta está entretejida en el papel, no impresa en él.",
           "img":"https://www.uscurrency.gov/sites/default/files/styles/unscaled/public/denominations/hundred2013_securityribbon.webp?itok=s3KqmJDV",
           "amount": 100,
           "edition": "2013"
