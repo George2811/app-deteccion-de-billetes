@@ -1,8 +1,6 @@
 import 'package:camera/camera.dart';
 import 'package:counterfeit_detector/state/appdata.dart';
-import 'package:counterfeit_detector/ui/views/control.dart';
 import 'package:counterfeit_detector/ui/views/home.dart';
-//import 'package:counterfeit_detector/state/appdata.dart';
 import 'package:counterfeit_detector/ui/views/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
