@@ -1,3 +1,4 @@
+import 'package:counterfeit_detector/ui/views/select_currency.dart';
 import 'package:flutter/material.dart';
 
 class DetectionCard extends StatelessWidget {
@@ -56,6 +57,7 @@ class DetectionCard extends StatelessWidget {
                         //  2. Selecciona si es detección de Soles o Dólares
                         //  3. Un mensaje de como funciona?
                         //  4. Se activa la cámara :)
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const SelectCurrency()));
                       },
                       icon: const Icon(
                         Icons.compare,

@@ -72,7 +72,7 @@ class _LoginViewState extends State<LoginView> {
               ),
             ),
             Container(
-              padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 40),
+              padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 40),
               child: Column(
                 children: [
                   TextFormField(

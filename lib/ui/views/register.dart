@@ -63,7 +63,7 @@ class _RegisterViewState extends State<RegisterView> {
               ),
             ),
             Container(
-              padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 40),
+              padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 40),
               child: Column(
                 children: [
                   TextFormField(

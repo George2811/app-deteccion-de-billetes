@@ -57,7 +57,7 @@ class _CharacteristicsViewState extends State<CharacteristicsView> {
             ),
           ),
       body: CarouselSlider(
-        options: CarouselOptions(height: 590.0, viewportFraction: 0.9, enlargeCenterPage: true, enlargeFactor: 0.15),
+        options: CarouselOptions(height: 600.0, viewportFraction: 0.9, enlargeCenterPage: true, enlargeFactor: 0.15),
         items: characteristics.map((e) {
           return Builder(
             builder: (BuildContext context) {

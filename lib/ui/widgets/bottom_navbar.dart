@@ -1,14 +1,23 @@
+import 'package:counterfeit_detector/state/appdata.dart';
 import 'package:counterfeit_detector/ui/views/guide.dart';
 import 'package:counterfeit_detector/ui/views/home.dart';
 import 'package:counterfeit_detector/ui/views/select_currency.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
-class BottomNavBar extends StatelessWidget {
+class BottomNavBar extends StatefulWidget {
+
   const BottomNavBar({super.key});
 
   @override
+  State<BottomNavBar> createState() => _BottomNavBarState();
+}
+
+class _BottomNavBarState extends State<BottomNavBar> {
+  @override
   Widget build(BuildContext context) {
+    //bool show = appData.showNavBar;
+
     List<Widget> _buildScreens() {
       return [
         const HomeView(),
@@ -49,6 +58,7 @@ class BottomNavBar extends StatelessWidget {
       screens: _buildScreens(),
       items: _navBarsItems(),
       confineInSafeArea: true,
+      hideNavigationBar: appData.showNavBar,
       backgroundColor: Colors.white, // Default is Colors.white.
       handleAndroidBackButtonPress: true, // Default is true.
       resizeToAvoidBottomInset: true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
