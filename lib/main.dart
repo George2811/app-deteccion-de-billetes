@@ -2,6 +2,7 @@ import 'package:camera/camera.dart';
 import 'package:counterfeit_detector/state/appdata.dart';
 import 'package:counterfeit_detector/ui/views/home.dart';
 import 'package:counterfeit_detector/ui/views/splash.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -9,6 +10,7 @@ late List<CameraDescription> cameras;
 Future<void> main() async {
   //appData.showNavBar = true;
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   cameras = await availableCameras();
   runApp(const MainApp());
 }

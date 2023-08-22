@@ -1,4 +1,5 @@
-import 'package:counterfeit_detector/ui/views/login.dart';
+//import 'package:counterfeit_detector/ui/views/login.dart';
+import 'package:counterfeit_detector/ui/widgets/widget_tree.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -17,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(const Duration(seconds: 3), () {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const LoginView()),
+        MaterialPageRoute(builder: (context) => const WidgetTree()),
       );
     });
   }

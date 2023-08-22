@@ -1,5 +1,7 @@
+import 'package:counterfeit_detector/state/auth.dart';
 import 'package:counterfeit_detector/ui/views/control.dart';
 import 'package:counterfeit_detector/ui/views/register.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class LoginView extends StatefulWidget {
@@ -10,13 +12,34 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-  //bool _loading = false;
   //final _formKey = GlobalKey<FormState>();
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
 
-  bool passenable = true;
+  String? errorMessage = '';
+  bool loading = false;
 
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  bool passenable = true; // Ocultar password
+
+  Future<void> signInWithEmailAndPassword() async {
+    try {
+      setState(() {
+        loading = true;
+      });
+      await Auth().signInWithEmailAndPassword(
+        email: _emailController.text,
+        password: _passwordController.text
+      );
+      Navigator.push(context, MaterialPageRoute(builder: (context) => const ControlView()));
+
+    } on FirebaseAuthException catch (e) {
+      setState(() {
+        errorMessage = e.message;
+        loading = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -128,10 +151,22 @@ class _LoginViewState extends State<LoginView> {
                         ),
                       ),
                       onPressed: (){
+                        signInWithEmailAndPassword();
                         // En verdad debe redirigir a una vista qye tenga el bottom_navbar, ya q ese gestiona todo
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => const ControlView()));
+                        if(errorMessage != ''){
+                          var snackBar = SnackBar(content: Text(errorMessage?? 'Error', style: TextStyle(color: const Color.fromARGB(255, 255, 111, 101)),),);
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        }
+                        if(loading){
+                          return null;
+                        }
+
+                        //Navigator.push(context, MaterialPageRoute(builder: (context) => const ControlView()));
                       },
-                      child: const Text(
+                      child: loading?
+                        const CircularProgressIndicator(color: Colors.black, strokeWidth: 3,)
+                        :
+                        const Text(
                         "Ingresar",
                         style: TextStyle(
                           color: Colors.black,

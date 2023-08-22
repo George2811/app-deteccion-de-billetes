@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "310027480288",
+    "project_id": "counterfeit-banknotes-7ec3f",
+    "storage_bucket": "counterfeit-banknotes-7ec3f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:310027480288:android:a1a17305ffe35b88c37485",
+        "android_client_info": {
+          "package_name": "com.example.counterfeit_detector"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "310027480288-3c4t1ielbs33lskmrc4v1b6o6cim0vu5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIqw0abYukv-H3aT3RwOK9Mx4QCRzuus8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "310027480288-3c4t1ielbs33lskmrc4v1b6o6cim0vu5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
