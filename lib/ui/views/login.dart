@@ -44,7 +44,7 @@ class _LoginViewState extends State<LoginView> {
                   text: const TextSpan(
                     children: [
                       TextSpan(
-                        text: 'Hola!\n',
+                        text: 'Hola !\n',
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
