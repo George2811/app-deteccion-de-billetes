@@ -22,7 +22,7 @@ class _LoginViewState extends State<LoginView> {
 
   bool passenable = true; // Ocultar password
 
-  Future<void> signInWithEmailAndPassword() async {
+  Future<void> signInWithEmailAndPassword(BuildContext context) async {
     try {
       setState(() {
         loading = true;
@@ -31,6 +31,10 @@ class _LoginViewState extends State<LoginView> {
         email: _emailController.text,
         password: _passwordController.text
       );
+      setState(() {
+        loading = false;
+      });
+
       Navigator.push(context, MaterialPageRoute(builder: (context) => const ControlView()));
 
     } on FirebaseAuthException catch (e) {
@@ -38,6 +42,8 @@ class _LoginViewState extends State<LoginView> {
         errorMessage = e.message;
         loading = false;
       });
+      var snackBar = SnackBar(content: Text(errorMessage?? 'Error', style: TextStyle(color: const Color.fromARGB(255, 255, 111, 101)),),);
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
   }
 
@@ -150,17 +156,13 @@ class _LoginViewState extends State<LoginView> {
                           borderRadius: BorderRadius.circular(18),
                         ),
                       ),
-                      onPressed: (){
-                        signInWithEmailAndPassword();
-                        // En verdad debe redirigir a una vista qye tenga el bottom_navbar, ya q ese gestiona todo
-                        if(errorMessage != ''){
-                          var snackBar = SnackBar(content: Text(errorMessage?? 'Error', style: TextStyle(color: const Color.fromARGB(255, 255, 111, 101)),),);
-                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                        }
-                        if(loading){
+                      onPressed: (){                        
+                        if(!loading){
+                          signInWithEmailAndPassword(context);
+                        } else {
+                          print("Cargando...");
                           return null;
                         }
-
                         //Navigator.push(context, MaterialPageRoute(builder: (context) => const ControlView()));
                       },
                       child: loading?
@@ -187,6 +189,7 @@ class _LoginViewState extends State<LoginView> {
                           style: TextStyle(
                             color: Color.fromARGB(255, 1, 24, 7),
                             decoration: TextDecoration.underline,
+                            fontWeight: FontWeight.bold
                           ),
                         ),
                         onTap: () {

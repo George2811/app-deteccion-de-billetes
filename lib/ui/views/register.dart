@@ -1,5 +1,8 @@
+import 'package:counterfeit_detector/state/appdata.dart';
+import 'package:counterfeit_detector/state/auth.dart';
 import 'package:counterfeit_detector/ui/views/control.dart';
 import 'package:counterfeit_detector/ui/views/login.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class RegisterView extends StatefulWidget {
@@ -10,12 +13,38 @@ class RegisterView extends StatefulWidget {
 }
 
 class _RegisterViewState extends State<RegisterView> {
-  //bool _loading = false;
   //final _formKey = GlobalKey<FormState>();
+  String? errorMessage = '';
+  bool loading = false;
+
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _password2Controller = TextEditingController();
 
+  Future<void> createUserWithEmailAndPassword(BuildContext context) async {
+    try {
+      setState(() {
+        loading = true;
+      });
+      await Auth().createUserWithEmailAndPassword(
+        email: _emailController.text,
+        password: _password2Controller.text
+      );
+      setState(() {
+        loading = false;
+      });
+
+      Navigator.push(context, MaterialPageRoute(builder: (context) => const ControlView()));
+
+    } on FirebaseAuthException catch (e) {
+      setState(() {
+        errorMessage = e.message;
+        loading = false;
+      });
+      var snackBar = SnackBar(content: Text(errorMessage?? 'Error', style: TextStyle(color: const Color.fromARGB(255, 255, 111, 101)),),);
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -128,9 +157,16 @@ class _RegisterViewState extends State<RegisterView> {
                         ),
                       ),
                       onPressed: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => const ControlView()));
+                        if(!loading){
+                          createUserWithEmailAndPassword(context);
+                        } else {
+                          //return null;
+                        }
                       },
-                      child: const Text(
+                      child: loading?
+                        const CircularProgressIndicator(color: Colors.black, strokeWidth: 3,)
+                        :
+                        const Text(
                         "Registrar",
                         style: TextStyle(
                           color: Colors.black,
@@ -151,6 +187,7 @@ class _RegisterViewState extends State<RegisterView> {
                           style: TextStyle(
                             color: Color.fromARGB(255, 1, 24, 7),
                             decoration: TextDecoration.underline,
+                            fontWeight: FontWeight.bold
                           ),
                         ),
                         onTap: () {

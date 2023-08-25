@@ -24,7 +24,9 @@ class TopBar extends StatelessWidget {
                 return Container(
                   padding: const EdgeInsets.all(7),
                   child: FloatingActionButton(
-                    onPressed: () => {},
+                    onPressed: () => {
+                      Scaffold.of(context).openDrawer()
+                    },
                     child: ClipOval(
                       child:Image.network(
                         "https://upload.wikimedia.org/wikipedia/commons/d/d1/CARLOS-WARD-PERFIL.png",

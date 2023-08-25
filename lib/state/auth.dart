@@ -19,6 +19,7 @@ class Auth {
       email: email,
       password: password
     );
+    //await currentUser?.updateDisplayName(email);
   }
 
   Future<void> signOut() async {

@@ -8,7 +8,6 @@ import 'package:flutter/services.dart';
 
 late List<CameraDescription> cameras;
 Future<void> main() async {
-  //appData.showNavBar = true;
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   cameras = await availableCameras();
