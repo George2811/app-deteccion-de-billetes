@@ -1,10 +1,5 @@
-import 'package:counterfeit_detector/main.dart';
-import 'package:counterfeit_detector/state/appdata.dart';
 import 'package:counterfeit_detector/state/auth.dart';
 import 'package:counterfeit_detector/ui/views/login.dart';
-import 'package:counterfeit_detector/ui/views/splash.dart';
-import 'package:counterfeit_detector/ui/widgets/widget_tree.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class SideBar extends StatefulWidget {
@@ -16,7 +11,7 @@ class SideBar extends StatefulWidget {
 
 class _SideBarState extends State<SideBar> {
   String? email = Auth().currentUser?.email;
-  
+
   Future<void> signOut() async {
     await Auth().signOut(); 
   }

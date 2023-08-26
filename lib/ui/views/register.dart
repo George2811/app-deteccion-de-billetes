@@ -1,4 +1,3 @@
-import 'package:counterfeit_detector/state/appdata.dart';
 import 'package:counterfeit_detector/state/auth.dart';
 import 'package:counterfeit_detector/ui/views/control.dart';
 import 'package:counterfeit_detector/ui/views/login.dart';
