@@ -1,4 +1,5 @@
 import 'package:counterfeit_detector/state/auth.dart';
+import 'package:counterfeit_detector/ui/views/detections.dart';
 import 'package:counterfeit_detector/ui/views/login.dart';
 import 'package:flutter/material.dart';
 
@@ -38,7 +39,9 @@ class _SideBarState extends State<SideBar> {
           ListTile(
             leading: const Icon(Icons.compare),
             title: const Text("Mis detecciones"),
-            onTap: (){},
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const DetectionsView()));
+            },
           ),         
           ListTile(
             leading: const Icon(Icons.logout_rounded),

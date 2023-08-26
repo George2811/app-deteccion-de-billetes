@@ -1,4 +1,3 @@
-import 'package:counterfeit_detector/ui/views/select_currency.dart';
 import 'package:flutter/material.dart';
 
 class DetectionCard extends StatelessWidget {
@@ -7,80 +6,79 @@ class DetectionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      margin: const EdgeInsets.only(bottom: 18),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
       ),
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10.0),
-          gradient: const LinearGradient(
-            begin: Alignment.centerRight,
-            end: Alignment.centerLeft,
-            stops: [0.7, 1],
-            colors: [Color.fromARGB(255, 1, 9, 3), Color.fromARGB(255, 2, 38, 12)],
-          )
-        ),
-        width: 300,
-        height: 200,
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children:  <Widget>[
-            SizedBox(
-              width: 150,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 12),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      "Detector de billetes",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
-                    ),
-                    const SizedBox(height: 18),
-                    const Text(
-                      "Detecta la veracidad de tus billetes.",
-                      style: TextStyle(color: Colors.white, fontSize: 12),
-                    ),
-                    const SizedBox(height: 18),
-                    ElevatedButton.icon(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromARGB(255, 2, 190, 30),
-                      ),
-                      onPressed: () {
-                        // LOS REDIRIGE A LA FUNCIONALIDAD DE DETECCIÓN DE BILLETES
-                        //  1. Se aprueban permisos de cámara
-                        //  2. Selecciona si es detección de Soles o Dólares
-                        //  3. Un mensaje de como funciona?
-                        //  4. Se activa la cámara :)
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => const SelectCurrency()));
-                      },
-                      icon: const Icon(
-                        Icons.compare,
-                        size: 20.0,
-                      ),
-                      label: const Text('Empezar'),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+      child: SizedBox(
+        width: 320,
+        height: 255,
+        child: Column(
+          children: [
             ClipRRect(
-              borderRadius: const BorderRadius.only(
-                topRight: Radius.circular(10.0),
-                bottomRight: Radius.circular(10.0),
+              borderRadius: const BorderRadius.all(
+                Radius.circular(10.0),
               ),
-              child: Image.asset(
-                "assets/cover.jpg",
-                height: 200,
-                width: 150,
-                fit: BoxFit.fitHeight,
+              child: Image.network(
+                "https://www.ipe.org.pe/portal/wp-content/uploads/2020/03/retiro-CTS-finanzas.jpg",
+                height: 180,
+                width: 320,
+                fit: BoxFit.fill,
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 12),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const SizedBox(
+                    width: 165,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "\$100 falsos",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            Text(
+                              "99.88%",
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Color.fromARGB(172, 0, 0, 0),
+                                fontWeight: FontWeight.w400
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 5,),
+                        Text(
+                          "28/08/2023 - 14:30 PM",
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.black54,
+                            fontWeight: FontWeight.w300,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    alignment: Alignment.centerRight,
+                    child: IconButton(
+                      onPressed: (){},
+                      icon: const Icon(Icons.delete_forever_rounded, color: Color.fromARGB(255, 216, 79, 70),),
+                    ),
+                  )
+                ],
+              ),
+            )            
           ],
         ),
       ),

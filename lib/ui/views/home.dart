@@ -1,5 +1,5 @@
 import 'package:counterfeit_detector/ui/widgets/currency_card.dart';
-import 'package:counterfeit_detector/ui/widgets/detection_card.dart';
+import 'package:counterfeit_detector/ui/widgets/detection_cover.dart';
 import 'package:counterfeit_detector/ui/widgets/side_bar.dart';
 import 'package:counterfeit_detector/ui/widgets/top_bar.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +21,7 @@ class HomeView extends StatelessWidget {
             mainAxisSize: MainAxisSize.max,
             children: [
               const TopBar(),
-              const DetectionCard(),
+              const DetectionCover(),
               Container(
                 margin: const EdgeInsets.fromLTRB(0, 40, 0, 0),
                 alignment: Alignment.centerLeft,
