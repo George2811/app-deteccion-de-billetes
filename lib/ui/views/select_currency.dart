@@ -76,6 +76,7 @@ class _SelectCurrencyState extends State<SelectCurrency> {
                 borderRadius: BorderRadius.circular(10.0),
               ),
               child: InkWell(
+                borderRadius: BorderRadius.circular(10.0),
                 onTap: (){
                   _changeSelectedColor(1);
                   setState(() {
@@ -139,6 +140,7 @@ class _SelectCurrencyState extends State<SelectCurrency> {
                 borderRadius: BorderRadius.circular(10.0),
               ),
               child: InkWell(
+                borderRadius: BorderRadius.circular(10.0),
                 onTap: (){
                   _changeSelectedColor(2);
                   //_changeUnSelectedColor(2);

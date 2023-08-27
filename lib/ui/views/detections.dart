@@ -52,12 +52,13 @@ class _DetectionsViewState extends State<DetectionsView> with TickerProviderStat
             ),
           ),
           Container(
-            margin: const EdgeInsets.symmetric(horizontal: 38),
+            margin: const EdgeInsets.symmetric(horizontal: 24),
             height: 640,
             child: TabBarView(
               controller: _tabController,
               children: [
                 ListView(
+                  padding: const EdgeInsets.only(left: 10, right: 10),
                   children: const <Widget>[
                     DetectionCard(),
                     DetectionCard(),
@@ -66,6 +67,7 @@ class _DetectionsViewState extends State<DetectionsView> with TickerProviderStat
                   ],
                 ),
                 ListView(
+                  padding: const EdgeInsets.only(left: 10, right: 10),
                   children: const <Widget>[
                     DetectionCard(),
                     DetectionCard(),

@@ -29,7 +29,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
     List<PersistentBottomNavBarItem> _navBarsItems() {
       return [
         PersistentBottomNavBarItem(
-          icon: const Icon(Icons.home),
+          icon: const Icon(Icons.home_rounded),
           //title: ("Home"),
           activeColorPrimary: const Color.fromARGB(255, 1, 24, 7),
           inactiveColorPrimary: Colors.grey,

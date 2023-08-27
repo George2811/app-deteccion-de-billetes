@@ -21,6 +21,7 @@ class CurrencyCard extends StatelessWidget {
           // Función para redirigirlos a la vista Guía (hay BUG)
           Navigator.push(context, MaterialPageRoute(builder: (context) => CharacteristicsView(category: title,)));
         },
+        borderRadius: BorderRadius.circular(10.0),
         child: SizedBox(
           width: 300,
           height: 100,
