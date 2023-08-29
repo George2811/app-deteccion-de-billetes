@@ -1,6 +1,5 @@
-import 'package:counterfeit_detector/ui/views/login.dart';
+import 'package:counterfeit_detector/ui/views/splash.dart';
 import 'package:flutter/material.dart';
-//import 'package:counterfeit_detector/ui/widgets/bottom_navbar.dart';
 
 void main() {
   runApp(const MainApp());
@@ -23,7 +22,7 @@ class MainApp extends StatelessWidget {
           suffixIconColor: Color.fromARGB(255, 1, 24, 7),
         ),
       ),
-      home: const LoginView(),
+      home: const SplashScreen(),
     );
   }
 }

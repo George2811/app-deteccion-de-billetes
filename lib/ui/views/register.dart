@@ -1,5 +1,4 @@
 import 'package:counterfeit_detector/ui/views/control.dart';
-import 'package:counterfeit_detector/ui/views/home.dart';
 import 'package:counterfeit_detector/ui/views/login.dart';
 import 'package:flutter/material.dart';
 
