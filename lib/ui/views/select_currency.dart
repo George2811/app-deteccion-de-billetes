@@ -1,3 +1,4 @@
+import 'package:counterfeit_detector/ui/views/camareFuntionality.dart';
 import 'package:flutter/material.dart';
 
 class SelectCurrency extends StatefulWidget {
@@ -77,6 +78,9 @@ class _SelectCurrencyState extends State<SelectCurrency> {
               onTap: (){
                 _changeSelectedColor(1);
                 // redirige a la funcionalidad de detección
+                   Navigator.push(
+                  context,MaterialPageRoute(builder: (context) => CameraFunctionalityView()),
+    );
               },
               child: Container(
                 height: 160,
@@ -135,7 +139,9 @@ class _SelectCurrencyState extends State<SelectCurrency> {
             child: InkWell(
               onTap: (){
                 _changeSelectedColor(2);
+              
                 // redirige a la funcionalidad de detección
+
               },
               child: Container(
                 height: 160,
