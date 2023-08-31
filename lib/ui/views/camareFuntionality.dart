@@ -1,3 +1,4 @@
+import 'package:counterfeit_detector/ui/services/prediction_service.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
@@ -9,6 +10,7 @@ class CameraFunctionalityView extends StatefulWidget {
 
 class _CameraFunctionalityViewState extends State<CameraFunctionalityView> {
   String _imagePath='';
+  Map<String,dynamic>?_prediction;
   Future<void> _getImageFromCamera() async {
     final picker = ImagePicker();
     final pickedImage = await picker.getImage(source: ImageSource.camera);
@@ -18,6 +20,7 @@ class _CameraFunctionalityViewState extends State<CameraFunctionalityView> {
     }
   }
 
+
   Future<void> _getImageFromGallery() async {
 
     final picker = ImagePicker();
@@ -26,9 +29,22 @@ class _CameraFunctionalityViewState extends State<CameraFunctionalityView> {
     if (pickedImage != null) {
       setState(() {
         _imagePath=pickedImage.path;
-        
+        _prediction=null;
       });
+      _predictImage(_imagePath);
+      
       // Procesa o muestra la imagen seleccionada de la galería aquí.
+    }
+  }
+   Future<void> _predictImage(String imagePath) async {
+    try {
+      var predictionResponse = await predictImage(imagePath);
+
+      setState(() {
+        _prediction = predictionResponse;
+      });
+    } catch (e) {
+      print('Error predicting image: $e');
     }
   }
 
@@ -58,6 +74,18 @@ class _CameraFunctionalityViewState extends State<CameraFunctionalityView> {
                   height: 200,
                   width: 200,
                 ):SizedBox.shrink(),
+                if(_prediction!=null)
+                Column(
+                  children: [
+                    Text('Prediccion:${_prediction!["prediction"]}',
+                    style: TextStyle(fontSize: 18),
+                    ),
+                    Text('Porcentaje:${_prediction!["percetange"]}',
+                    style: TextStyle(fontSize: 18),)
+                    
+                  ],
+                )
+
               ],
             ),
           ),
