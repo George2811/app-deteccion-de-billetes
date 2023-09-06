@@ -20,7 +20,23 @@ class _CameraFunctionalityViewState extends State<CameraFunctionalityView> {
     final pickedImage = await picker.pickImage(source: ImageSource.camera);
 
     if (pickedImage != null) {
-      // Procesa o muestra la imagen tomada aquí.
+       setState(() {
+      _imagePath = pickedImage.path;
+      _prediction = null;
+    });
+
+    try {
+      var predictionResponse = await predictImage(pickedImage.path);
+
+      setState(() {
+        _prediction = predictionResponse;
+      });
+
+      File imageFile = File(pickedImage.path);
+      _navigateToDetectionView(imageFile, _prediction);
+    } catch (e) {
+      print('Error predicting image: $e');
+    }
     }
   }
 
@@ -100,102 +116,7 @@ class _CameraFunctionalityViewState extends State<CameraFunctionalityView> {
         ElevatedButton(
           onPressed: _getImageFromGallery,
           child: const Text('Seleccionar desde la galería'),
-        ),
-        _imagePath.isNotEmpty
-            ? Image.file(
-                File(_imagePath),
-                height: 350,
-                width: 350,
-              )
-            : SizedBox.shrink(),
-        if (_prediction != null)
-          Row(
-            children: [
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 3.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5.0),
-                      color: Colors.black),
-                  padding: const EdgeInsets.all(8.0),
-                  child: const Text(
-                    'Moneda',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16.0,
-                    ),
-                  ),
-                ),
-              ),
-              Expanded(
-                  child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Prediccion:${_prediction?["prediction"] ?? "N/A"}',
-                  style: const TextStyle(
-                      fontSize: 15.0, fontWeight: FontWeight.w600),
-                ),
-              ))
-            ],
-          ),
-        Row(
-          children: [
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 3.0),
-              child: Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5.0),
-                    color: Colors.black),
-                padding: const EdgeInsets.all(8.0),
-                child: const Text(
-                  'Predicción',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16.0,
-                  ),
-                ),
-              ),
-            ),
-            Expanded(
-                child: Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                'Porcentaje:${_prediction?["percetange"] ?? "N/A"}',
-                style:
-                    const TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
-              ),
-            ))
-          ],
-        ),
-        const SizedBox(height: 10.0),
-        CircularPercentIndicator(
-          radius: 40.0,
-          lineWidth: 7.0,
-          percent: 0.75,
-          center: const Text(
-            '75%',
-            style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-          ),
-          progressColor: const Color.fromARGB(255, 33, 134, 7),
-        ),
-        const SizedBox(height: 20.0),
-        const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 3.0),
-            child: Center(
-              child: Text(
-                'En base a la Imagen,se predice con un 95.91% de seguridad que el billete de 20 nuevos soles es Falso',
-                style: TextStyle(fontSize: 14.0, color: Colors.black54),
-              ),
-            )),
-        Center(
-          child: ElevatedButton(
-            onPressed: () {},
-            style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
-            child: const Text('Guardar'),
-          ),
-        )
+        ),  
       ],
     ));
   }

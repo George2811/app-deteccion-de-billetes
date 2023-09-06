@@ -1,3 +1,4 @@
+import 'dart:ffi';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
@@ -8,8 +9,54 @@ class DetectionView extends StatelessWidget {
 
   DetectionView({required this.image, required this.predictionResponse});
 
+String extractMoneda(String value) {
+  final RegExp solesRegExp = RegExp(r'soles', caseSensitive: false);
+  final RegExp dolaresRegExp = RegExp(r'dólares', caseSensitive: false);
+
+  if (solesRegExp.hasMatch(value)) {
+    return 'soles';
+  } else if (dolaresRegExp.hasMatch(value)) {
+    return 'dólares';
+  } else {
+    return '';
+  }
+}
+
+
+String getMoneda() {
+    if (predictionResponse != null) {
+      String prediction = predictionResponse!["prediction"] ?? "";
+      return extractMoneda(prediction);
+    }
+    return '';
+  }
+
+  String formatPercentage(Map<String, dynamic>? predictionResponse) {
+  final double? percentage = predictionResponse?["percetange"];
+  if (percentage != null) {
+    final formattedPercentage = (percentage * 100).toStringAsFixed(2);
+    return '%$formattedPercentage';
+  }
+  
+  return '';
+}
+ double percentageValue(Map<String,dynamic>? predictionResponse){
+  final double? percentage=predictionResponse?["percetange"];
+  if(percentage!=null){
+    return percentage;
+  }
+  return 0.0;
+
+ }
+
+
   @override
   Widget build(BuildContext context) {
+    String moneda = getMoneda();
+    String percentage=formatPercentage(predictionResponse);
+    double perValue=percentageValue(predictionResponse);
+
+
     return Scaffold(
       body: Column(children: [
         AppBar(
@@ -43,12 +90,12 @@ class DetectionView extends StatelessWidget {
           children: [
             Padding(
               padding:
-                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 3.0),
+                  const EdgeInsets.only(left: 90.0,right: 10.0, bottom: 3.0),
               child: Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5.0),
                     color: Colors.black),
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.only( left:8.0,right:22.0,bottom: 8.0,top: 8.0),
                 child: const Text(
                   'Moneda',
                   style: TextStyle(
@@ -62,7 +109,8 @@ class DetectionView extends StatelessWidget {
                 child: Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                'Prediccion:${predictionResponse?["prediction"] ?? "N/A"}',
+                moneda,
+                //'Prediccion:${predictionResponse?["prediction"] ?? "N/A"}',
                 style: const TextStyle(
                     fontSize: 15.0, fontWeight: FontWeight.w600),
               ),
@@ -73,7 +121,7 @@ class DetectionView extends StatelessWidget {
           children: [
             Padding(
               padding:
-                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 3.0),
+                  const EdgeInsets.only(left: 90.0,right: 10.0, bottom: 3.0),
               child: Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5.0),
@@ -92,7 +140,8 @@ class DetectionView extends StatelessWidget {
                 child: Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                'Porcentaje:${predictionResponse?["percetange"] ?? "N/A"}',
+                '${predictionResponse?["prediction"] ?? "N/A"}',
+                //'Porcentaje:${predictionResponse?["percetange"] ?? "N/A"}',
                 style:
                     const TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
               ),
@@ -103,20 +152,20 @@ class DetectionView extends StatelessWidget {
         CircularPercentIndicator(
           radius: 40.0,
           lineWidth: 7.0,
-          percent: 0.75,
-          center: const Text(
-            '75%',
-            style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+          percent: perValue,
+          center:  Text(
+            percentage,
+            style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
           ),
           progressColor: const Color.fromARGB(255, 33, 134, 7),
         ),
         const SizedBox(height: 20.0),
-        const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 3.0),
+        Padding(
+            padding: EdgeInsets.symmetric(horizontal: 40.0, vertical: 3.0),
             child: Center(
               child: Text(
-                'En base a la Imagen,se predice con un 95.91% de seguridad que el billete de 20 nuevos soles es Falso',
-                style: TextStyle(fontSize: 14.0, color: Colors.black54),
+                'En base a la Imagen,se predice con un $percentage de seguridad que el billete de ${predictionResponse?["prediction"] ?? "N/A"} ',
+                style: const TextStyle(fontSize: 14.0, color: Colors.black54),
               ),
             )),
         Center(
@@ -126,7 +175,7 @@ class DetectionView extends StatelessWidget {
                 backgroundColor: Colors.black,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0)),
-                padding: const EdgeInsets.symmetric(horizontal: 60.0)),
+                padding: const EdgeInsets.symmetric(horizontal: 80.0)),
             child: const Text('Guardar'),
           ),
         )
