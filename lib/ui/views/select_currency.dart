@@ -1,5 +1,6 @@
 import 'package:counterfeit_detector/main.dart';
 import 'package:counterfeit_detector/state/appdata.dart';
+import 'package:counterfeit_detector/ui/views/cameraFuntionality.dart';
 import 'package:flutter/material.dart';
 
 class SelectCurrency extends StatefulWidget {
@@ -83,7 +84,7 @@ class _SelectCurrencyState extends State<SelectCurrency> {
                     appData.showNavBar = true;
                   });
                   
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const CameraView()));
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const CameraFunctionalityView()));
                 },
                 child: Container(
                   height: 160,
