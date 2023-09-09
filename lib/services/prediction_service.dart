@@ -2,7 +2,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 Future<Map<String, dynamic>> predictImage(String filePath) async {
-  var url = Uri.parse('http://0.0.0.0:8000/predictions/soles');
+  var url = Uri.parse('http://192.168.1.21:8000/predictions/soles');
+  // http://0.0.0.0:8000/predictions/soles
   // http://192.168.18.11:8000/predictions/images
 
   var request = http.MultipartRequest('POST', url)

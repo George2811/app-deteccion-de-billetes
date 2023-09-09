@@ -42,6 +42,7 @@ class _SelectCurrencyState extends State<SelectCurrency> {
       body: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.max,
+          
           children: [
             AppBar(
               elevation: 0,
@@ -198,6 +199,34 @@ class _SelectCurrencyState extends State<SelectCurrency> {
                     ),
                   ),
                 ),
+              ),
+            ),
+            const SizedBox(height: 50,),
+            Container(
+              height: 160,
+              width: 300,
+              padding: const EdgeInsets.symmetric(horizontal: 2),
+              child: const Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Nota\n',
+                    style: TextStyle(
+                      color: Colors.black54,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                    ),
+                  ),
+                  Text(
+                    'Para el correcto funcionamiento del modelo, captura la imágen en un sitio con la iluminación adecuada. Además, la resolución de la cámara debe ser como mínimo de 12MP.',
+                    textAlign: TextAlign.justify,
+                    style: TextStyle(
+                      color: Colors.black54,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 14,
+                    ),
+                  )
+                ],
               ),
             ),
           ],
