@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:counterfeit_detector/services/prediction_service.dart';
 import 'package:counterfeit_detector/ui/views/detection.dart';
 import 'package:flutter/material.dart';
