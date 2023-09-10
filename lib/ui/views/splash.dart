@@ -60,15 +60,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   text: const TextSpan(
                     children: [
                       TextSpan(
-                        text: 'Detector de\n',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 35,
-                        ),
-                      ),
-                       TextSpan(
-                        text: 'billetes falsos\n\n',
+                        text: 'SafyCash\n\n',
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,

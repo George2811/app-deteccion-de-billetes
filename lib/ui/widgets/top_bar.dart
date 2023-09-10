@@ -28,11 +28,11 @@ class TopBar extends StatelessWidget {
                       Scaffold.of(context).openDrawer()
                     },
                     child: ClipOval(
-                      child:Image.network(
-                        "https://upload.wikimedia.org/wikipedia/commons/d/d1/CARLOS-WARD-PERFIL.png",
+                      child: Image.asset(
+                        "assets/logo_rounded.png",
                         fit: BoxFit.cover,
-                      ),
-                    ),
+                      )
+                    )
                   ),
                 );
               },
