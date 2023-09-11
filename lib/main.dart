@@ -21,7 +21,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       //home: BottomNavBar(),
-      //debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         textSelectionTheme: const TextSelectionThemeData(
           cursorColor: Color.fromARGB(255, 1, 24, 7),
