@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 Future<Map<String, dynamic>> predictImage(String filePath) async {
   var url = Uri.parse('https://safycash-api-je3ddljhia-rj.a.run.app/predictions/soles');
   //var url = Uri.parse('http://192.168.18.11:8000/predictions/soles');
+
   // http://0.0.0.0:8000/predictions/soles
   // http://192.168.18.11:8000/predictions/images
   
