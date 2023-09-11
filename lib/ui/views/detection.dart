@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:counterfeit_detector/ui/views/cameraFuntionality.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
@@ -21,7 +22,7 @@ class DetectionView extends StatelessWidget {
     }
   }
 
-  String getVeracity(String value){
+  String getVeracity(String value) {
     final RegExp falseRegExp = RegExp(r'falso', caseSensitive: false);
     if (falseRegExp.hasMatch(value)) {
       return 'Falso';
@@ -44,26 +45,25 @@ class DetectionView extends StatelessWidget {
       final formattedPercentage = (percentage * 100).toStringAsFixed(2);
       return '$formattedPercentage%';
     }
-    
+
     return '';
   }
 
-  double percentageValue(Map<String,dynamic>? predictionResponse){
-    final double? percentage=predictionResponse?["percentage"];
-    if(percentage!=null){
+  double percentageValue(Map<String, dynamic>? predictionResponse) {
+    final double? percentage = predictionResponse?["percentage"];
+    if (percentage != null) {
       return percentage;
     }
     return 0.0;
   }
 
-
   @override
   Widget build(BuildContext context) {
     String moneda = getMoneda();
-    String percentage=formatPercentage(predictionResponse);
-    double perValue=percentageValue(predictionResponse);
-    String veracity=getVeracity(predictionResponse?["prediction"]);
-    
+    String percentage = formatPercentage(predictionResponse);
+    double perValue = percentageValue(predictionResponse);
+    String veracity = getVeracity(predictionResponse?["prediction"]);
+
     return Scaffold(
       body: Column(children: [
         AppBar(
@@ -73,20 +73,22 @@ class DetectionView extends StatelessWidget {
               style: TextStyle(
                   color: Colors.black54, fontWeight: FontWeight.bold)),
           automaticallyImplyLeading: false,
-          leading: Container(
-            margin: const EdgeInsets.only(left: 25.0),
-            child: const Icon(
-              Icons.arrow_back_ios,
-              color: Colors.black54,
+          leading: GestureDetector(
+            onTap: () { Navigator.pop(context);},
+            child: Container(
+              margin: const EdgeInsets.only(left: 25.0),
+              child: const Icon(
+                Icons.arrow_back_ios,
+                color: Colors.black54,
+              ),
             ),
           ),
-          
         ),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 0),
           child: SizedBox(
-            width: 350,
-            height: 350,
+            width: 300,
+            height: 300,
             child: Image.file(
               image,
               fit: BoxFit.cover,
@@ -103,9 +105,8 @@ class DetectionView extends StatelessWidget {
               height: 34,
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5.0),
-                color: Colors.black
-              ),
+                  borderRadius: BorderRadius.circular(5.0),
+                  color: Colors.black),
               child: const Text(
                 'Moneda',
                 style: TextStyle(
@@ -117,9 +118,8 @@ class DetectionView extends StatelessWidget {
             const SizedBox(width: 30),
             Text(
               '${predictionResponse?["prediction"] ?? "N/A"}',
-              style: const TextStyle(
-                fontSize: 15.0, fontWeight: FontWeight.w600
-              ),
+              style:
+                  const TextStyle(fontSize: 15.0, fontWeight: FontWeight.w600),
             ),
           ],
         ),
@@ -133,9 +133,8 @@ class DetectionView extends StatelessWidget {
               height: 34,
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5.0),
-                color: Colors.black
-              ),
+                  borderRadius: BorderRadius.circular(5.0),
+                  color: Colors.black),
               child: const Text(
                 'Predicción',
                 style: TextStyle(
@@ -148,41 +147,44 @@ class DetectionView extends StatelessWidget {
             Text(
               veracity,
               style: TextStyle(
-                fontSize: 15.0, fontWeight: FontWeight.w600,
-                color: veracity == 'Verdadero' ? const Color.fromARGB(255, 33, 134, 7) : const Color.fromARGB(255, 182, 33, 23)
-              ),
+                  fontSize: 15.0,
+                  fontWeight: FontWeight.w600,
+                  color: veracity == 'Verdadero'
+                      ? const Color.fromARGB(255, 33, 134, 7)
+                      : const Color.fromARGB(255, 182, 33, 23)),
             ),
           ],
         ),
         const SizedBox(height: 20.0),
         CircularPercentIndicator(
-          radius: 40.0,
-          lineWidth: 7.0,
-          percent: perValue,
-          center:  Text(
-            percentage,
-            style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-          ),
-          progressColor: veracity == 'Verdadero' ? const Color.fromARGB(255, 33, 134, 7) : const Color.fromARGB(255, 182, 33, 23)
-        ),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 40.0, vertical: 23.0),
-          child: Center(
-            child: Text(
-              'En base a la imagen, se predice con un $percentage de seguridad que el billete es ${veracity.toLowerCase()}',
-              style: const TextStyle(fontSize: 14.0, color: Colors.black54),
+            radius: 40.0,
+            lineWidth: 7.0,
+            percent: perValue,
+            center: Text(
+              percentage,
+              style:
+                  const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
             ),
-          )
-        ),
+            progressColor: veracity == 'Verdadero'
+                ? const Color.fromARGB(255, 33, 134, 7)
+                : const Color.fromARGB(255, 182, 33, 23)),
+        Padding(
+            padding:const EdgeInsets.symmetric(horizontal: 40.0, vertical: 23.0),
+            child: Center(
+              child: Text(
+                'En base a la imagen, se predice con un $percentage de seguridad que el billete es ${veracity.toLowerCase()}',
+                style: const TextStyle(fontSize: 14.0, color: Colors.black54),
+              ),
+            )),
         Center(
           child: ElevatedButton(
             onPressed: () {},
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color.fromARGB(255, 2, 33, 10),
-              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 60.0),
+              padding:
+                  const EdgeInsets.symmetric(vertical: 12, horizontal: 60.0),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15.0)
-              ),
+                  borderRadius: BorderRadius.circular(15.0)),
             ),
             child: const Text(
               'Guardar',
