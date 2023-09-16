@@ -39,10 +39,12 @@ class _LoginViewState extends State<LoginView> {
 
     } on FirebaseAuthException catch (e) {
       setState(() {
-        errorMessage = e.message;
+        //errorMessage = e.message;
+        errorMessage = 'Error: No se ha podido iniciar sesión, valida las credenciales.';
+
         loading = false;
       });
-      var snackBar = SnackBar(content: Text(errorMessage?? 'Error', style: TextStyle(color: const Color.fromARGB(255, 255, 111, 101)),),);
+      var snackBar = SnackBar(content: Text(errorMessage?? 'Error', style: const TextStyle(color: Color.fromARGB(255, 255, 81, 68)),),backgroundColor: const Color.fromARGB(255, 0, 0, 0),);
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
   }
@@ -127,7 +129,7 @@ class _LoginViewState extends State<LoginView> {
                     decoration: InputDecoration(
                       labelText: "Contraseña",
                       suffixIcon: IconButton(
-                        icon: Icon(passenable== true? Icons.remove_red_eye : Icons.visibility_off, size: 20),
+                        icon: Icon(passenable== true? Icons.remove_red_eye : Icons.visibility_off, size: 20, color: const Color.fromARGB(197, 10, 10, 10)),
                         splashRadius: 15,
                         onPressed: (){
                           setState(() => passenable = !passenable);

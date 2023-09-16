@@ -20,8 +20,19 @@ class _RegisterViewState extends State<RegisterView> {
   final _passwordController = TextEditingController();
   final _password2Controller = TextEditingController();
 
+  bool passenable = true; // Ocultar password
+  bool passenable2 = true; // Ocultar password 2
+
+
   Future<void> createUserWithEmailAndPassword(BuildContext context) async {
     try {
+      final emailValid = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+      if(_emailController.text.trim().isEmpty || !_emailController.text.contains(emailValid)){
+        throw const FormatException('Favor, ingrese un correo valido (Ejemplo: abc@gmail.com)');
+      }
+      if(_passwordController.text != _password2Controller.text){
+        throw const FormatException('Las contraseñas no coinciden');
+      }
       setState(() {
         loading = true;
       });
@@ -32,15 +43,18 @@ class _RegisterViewState extends State<RegisterView> {
       setState(() {
         loading = false;
       });
-
       Navigator.push(context, MaterialPageRoute(builder: (context) => const ControlView()));
 
     } on FirebaseAuthException catch (e) {
       setState(() {
-        errorMessage = e.message;
+        //errorMessage = e.message;
+        errorMessage = 'Error: No se ha podido registrar el usuario.';
         loading = false;
       });
-      var snackBar = SnackBar(content: Text(errorMessage?? 'Error', style: TextStyle(color: const Color.fromARGB(255, 255, 111, 101)),),);
+      var snackBar = SnackBar(content: Text(errorMessage?? 'Error', style: const TextStyle(color: Color.fromARGB(255, 255, 81, 68)),),backgroundColor: const Color.fromARGB(255, 0, 0, 0),);
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    } on FormatException catch (msg){
+      var snackBar = SnackBar(content: Text(msg.message, style: const TextStyle(color: Color.fromARGB(255, 255, 81, 68)),),backgroundColor: const Color.fromARGB(255, 0, 0, 0),);
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
   }
@@ -113,8 +127,16 @@ class _RegisterViewState extends State<RegisterView> {
                   const SizedBox(height: 25),
                   TextFormField(
                     controller: _passwordController,
+                    obscureText: passenable,
                     decoration: InputDecoration(
                       labelText: "Contraseña",
+                      suffixIcon: IconButton(
+                        icon: Icon(passenable== true? Icons.remove_red_eye : Icons.visibility_off, size: 20, color: const Color.fromARGB(197, 10, 10, 10)),
+                        splashRadius: 15,
+                        onPressed: (){
+                          setState(() => passenable = !passenable);
+                        },
+                      ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(18),
                       ),
@@ -130,8 +152,16 @@ class _RegisterViewState extends State<RegisterView> {
                   const SizedBox(height: 25),
                   TextFormField(
                     controller: _password2Controller,
+                    obscureText: passenable2,
                     decoration: InputDecoration(
                       labelText: "Repite tu contraseña",
+                      suffixIcon: IconButton(
+                        icon: Icon(passenable2== true? Icons.remove_red_eye : Icons.visibility_off, size: 20, color: const Color.fromARGB(197, 10, 10, 10)),
+                        splashRadius: 15,
+                        onPressed: (){
+                          setState(() => passenable2 = !passenable2);
+                        },
+                      ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(18),
                       ),
