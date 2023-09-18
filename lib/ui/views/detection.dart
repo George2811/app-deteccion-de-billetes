@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:counterfeit_detector/ui/views/cameraFuntionality.dart';
+import 'package:counterfeit_detector/state/storage.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
@@ -8,6 +8,16 @@ class DetectionView extends StatelessWidget {
   final Map<String, dynamic>? predictionResponse;
 
   DetectionView({required this.image, required this.predictionResponse});
+
+  Future<void> _saveDetection() async {
+    try {
+      String imageUrl = await StoreData().uploadImageStorage("banknotes", image);
+      print(imageUrl);
+    } catch (e) {
+      print("Error saving the Image.");
+    }
+
+  }
 
   String extractMoneda(String value) {
     final RegExp solesRegExp = RegExp(r'soles', caseSensitive: false);
@@ -178,7 +188,7 @@ class DetectionView extends StatelessWidget {
             )),
         Center(
           child: ElevatedButton(
-            onPressed: () {},
+            onPressed: _saveDetection,
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color.fromARGB(255, 2, 33, 10),
               padding:
