@@ -7,7 +7,8 @@ import 'package:counterfeit_detector/state/appdata.dart';
 import 'dart:io';
 
 class CameraFunctionalityView extends StatefulWidget {
-  const CameraFunctionalityView({super.key});
+  final int currencyId;
+  const CameraFunctionalityView({super.key, this.currencyId = 0});
 
   @override
   State<CameraFunctionalityView> createState() =>
@@ -92,7 +93,7 @@ class _CameraFunctionalityViewState extends State<CameraFunctionalityView> {
       context,
       MaterialPageRoute(
         builder: (context) => DetectionView(
-            image: imageFile, predictionResponse: predictionResponse),
+            image: imageFile, predictionResponse: predictionResponse, currencyId:  widget.currencyId,),
       ),
     );
   }

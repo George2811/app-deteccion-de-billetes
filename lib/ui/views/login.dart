@@ -163,7 +163,6 @@ class _LoginViewState extends State<LoginView> {
                           print("Cargando...");
                           return null;
                         }
-                        //Navigator.push(context, MaterialPageRoute(builder: (context) => const ControlView()));
                       },
                       child: loading?
                         const CircularProgressIndicator(color: Colors.black, strokeWidth: 3,)

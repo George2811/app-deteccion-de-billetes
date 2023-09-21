@@ -4,8 +4,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 final FirebaseStorage _storage = FirebaseStorage.instance;
 
 class StoreData {
-  Future<String> uploadImageStorage(String childName, File file) async{
-    String uniqueFileName = DateTime.now().millisecondsSinceEpoch.toString();
+  Future<String> uploadImageStorage(String childName, String uniqueFileName, File file) async{
     String downloadUrl = "";
 
     Reference referenceDirImage = _storage.ref().child(childName);
@@ -21,5 +20,10 @@ class StoreData {
     }
     
     return downloadUrl;
+  }
+
+  Future<void> deleteImageStorage(String childName, String uniqueFileName) async {
+    Reference referenceDirImage = _storage.ref().child(childName).child(uniqueFileName);
+    referenceDirImage.delete();
   }
 }

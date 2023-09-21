@@ -85,7 +85,7 @@ class _SelectCurrencyState extends State<SelectCurrency> {
                     appData.showNavBar = true;
                   });
                   
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const CameraFunctionalityView()));
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const CameraFunctionalityView(currencyId: 1,)));
                 },
                 child: Container(
                   height: 160,
