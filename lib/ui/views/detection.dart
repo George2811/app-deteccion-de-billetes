@@ -27,7 +27,6 @@ class _DetectionViewState extends State<DetectionView> {
     try {
       String imageUrl = await StoreData().uploadImageStorage("banknotes", uniqueFileName, widget.image);
       var res = await saveDetection(widget.currencyId, classification, percentage, imageUrl);
-
       String msg = "Se guardó la detección correctamente.";
       snackBar = SnackBar(content: Text(msg, style: const TextStyle(color: Color.fromARGB(255, 22, 184, 49)),),backgroundColor: const Color.fromARGB(255, 0, 0, 0),);      
     } catch (e) {

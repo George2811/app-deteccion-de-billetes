@@ -26,6 +26,7 @@ Future<Map<String, dynamic>> saveDetection(
     'image_url': imageUrl
   };
 
+
   final response = await http.post(
     url,
     headers: {
@@ -35,7 +36,7 @@ Future<Map<String, dynamic>> saveDetection(
   );
 
   if (response.statusCode == 200) {
-    var jsonResponse = json.decode(response.body)['results'];
+    var jsonResponse = json.decode(response.body);
     return jsonResponse;
   } else {
     throw Exception('Failed to save detection via API');
