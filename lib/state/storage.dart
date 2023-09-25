@@ -26,4 +26,9 @@ class StoreData {
     Reference referenceDirImage = _storage.ref().child(childName).child(uniqueFileName);
     referenceDirImage.delete();
   }
+
+  Future<void> deleteImageFromUrl(String url) async {
+    Reference referenceDirImage = _storage.refFromURL(url);
+    referenceDirImage.delete();
+  }
 }

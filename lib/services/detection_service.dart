@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:counterfeit_detector/state/auth.dart';
+import 'package:counterfeit_detector/state/storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
@@ -63,4 +64,30 @@ Future<List<Map<String, dynamic>>> listDetectionsByUser() async {
     throw Exception('Failed to load detections by user via API');
   }
 
+}
+
+Future<String> deleteDetection(
+  int detectionId,
+  String imageUrl,
+  ) async {
+
+  String? userId = Auth().currentUser?.uid;
+  var url = Uri.parse('https://safycash-api-je3ddljhia-rj.a.run.app/detections/user/$userId/$detectionId');
+
+  final response = await http.delete(
+    url,
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  );
+
+  if (response.statusCode == 200) {
+    var jsonResponse = json.decode(response.body);
+
+    await StoreData().deleteImageFromUrl(imageUrl);
+
+    return jsonResponse;
+  } else {
+    throw Exception('Failed to save detection via API');
+  }
 }

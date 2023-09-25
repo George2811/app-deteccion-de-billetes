@@ -1,12 +1,14 @@
+import 'package:counterfeit_detector/services/detection_service.dart';
 import 'package:flutter/material.dart';
 
 class DetectionCard extends StatelessWidget {
+  final int id;
   final String image;
   final String classification;
   final String percentage;
   final String date;
 
-  const DetectionCard({super.key, this.image="https://www.ipe.org.pe/portal/wp-content/uploads/2020/03/retiro-CTS-finanzas.jpg", this.classification="", this.percentage="", this.date=""});
+  const DetectionCard({super.key, this.id=0, this.image="https://www.ipe.org.pe/portal/wp-content/uploads/2020/03/retiro-CTS-finanzas.jpg", this.classification="", this.percentage="", this.date=""});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,7 @@ class DetectionCard extends StatelessWidget {
           showDialog(
             context: context,
             builder: (BuildContext context) {
-              return DeleteCard(date: date,);
+              return DeleteCard(id: id, date: date, imageUrl: image,);
             },
           );
         },
@@ -111,8 +113,10 @@ class DetectionCard extends StatelessWidget {
 }
 
 class DeleteCard extends StatelessWidget{
+  final int id;
   final String date;
-  const DeleteCard({super.key, this.date=""});
+  final String imageUrl;
+  const DeleteCard({super.key, this.id=0, this.date="", required this.imageUrl});
 
   @override
   Widget build(BuildContext context) {
@@ -132,7 +136,7 @@ class DeleteCard extends StatelessWidget{
         ),
       ),
       content: Text(
-        date,
+        'Guardado el $date',
         //"Guardado el 28/08/2023 - 14:30 PM",
         textAlign: TextAlign.center,
         style: const TextStyle(
@@ -154,6 +158,7 @@ class DeleteCard extends StatelessWidget{
         const SizedBox(width: 20),
         ElevatedButton(
           onPressed: () {
+            deleteDetection(id, imageUrl);
             Navigator.pop(context);
           },
           style: ElevatedButton.styleFrom(

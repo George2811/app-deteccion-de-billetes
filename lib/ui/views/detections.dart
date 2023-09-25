@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:counterfeit_detector/services/detection_service.dart';
 import 'package:counterfeit_detector/ui/widgets/detection_card.dart';
 import 'package:flutter/material.dart';
@@ -87,6 +85,7 @@ class _DetectionsViewState extends State<DetectionsView> with TickerProviderStat
                   itemBuilder: (context, index) {
                     double percentage = detections[index]['percentage']*100;
                     return DetectionCard(
+                      id: detections[index]['id'],
                       image: detections[index]['image_url'],
                       classification: detections[index]['classification'],
                       percentage: percentage.toStringAsFixed(2),
