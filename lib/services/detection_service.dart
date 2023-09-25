@@ -25,6 +25,7 @@ Future<Map<String, dynamic>> saveDetection(
     'percentage': percentage,
     'image_url': imageUrl
   };
+  print(request);
 
   final response = await http.post(
     url,
