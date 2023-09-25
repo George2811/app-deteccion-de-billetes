@@ -129,6 +129,7 @@ class _CameraViewState extends State<CameraView> {
                   try {
                     await _controller.setFlashMode(FlashMode.auto);
                     XFile picture = await _controller.takePicture();
+                    print(picture);
                     // Aqui debemos enviar picture a la API (chequemos el foramto de la imagen)
                     
                   } on CameraException catch(e){

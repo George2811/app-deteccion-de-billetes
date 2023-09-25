@@ -1,7 +1,14 @@
+import 'package:counterfeit_detector/services/detection_service.dart';
 import 'package:flutter/material.dart';
 
 class DetectionCard extends StatelessWidget {
-  const DetectionCard({super.key});
+  final int id;
+  final String image;
+  final String classification;
+  final String percentage;
+  final String date;
+
+  const DetectionCard({super.key, this.id=0, this.image="https://www.ipe.org.pe/portal/wp-content/uploads/2020/03/retiro-CTS-finanzas.jpg", this.classification="", this.percentage="", this.date=""});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +22,7 @@ class DetectionCard extends StatelessWidget {
           showDialog(
             context: context,
             builder: (BuildContext context) {
-              return const DeleteCard();
+              return DeleteCard(id: id, date: date, imageUrl: image,);
             },
           );
         },
@@ -30,7 +37,7 @@ class DetectionCard extends StatelessWidget {
                   Radius.circular(10.0),
                 ),
                 child: Image.network(
-                  "https://www.ipe.org.pe/portal/wp-content/uploads/2020/03/retiro-CTS-finanzas.jpg",
+                  image,
                   height: 180,
                   width: 350,
                   fit: BoxFit.fill,
@@ -53,9 +60,9 @@ class DetectionCard extends StatelessWidget {
                             color: Color.fromARGB(234, 4, 43, 14),
                             borderRadius: BorderRadius.all(Radius.circular(5)),
                           ),
-                          child: const Text(
-                            "\$100 falsos",
-                            style: TextStyle(
+                          child: Text(
+                            classification,
+                            style: const TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.w500,
                               color: Colors.white
@@ -65,9 +72,10 @@ class DetectionCard extends StatelessWidget {
                         const SizedBox(height: 8,),
                         Container(
                           margin: const EdgeInsets.only(left: 2),
-                          child: const Text(
-                            "28/08/2023 - 14:30 PM",
-                            style: TextStyle(
+                          child: Text(
+                            date,
+                            //"28/08/2023 - 14:30 PM",
+                            style: const TextStyle(
                               fontSize: 15,
                               color: Colors.black54,
                               fontWeight: FontWeight.w400,
@@ -77,16 +85,16 @@ class DetectionCard extends StatelessWidget {
                       ],
                     ),
                     Container(
-                      width: 60,
+                      width: 66,
                       height: 28,
                       alignment: Alignment.center,
                       decoration: const BoxDecoration(
                         color: Colors.black87,
                         borderRadius: BorderRadius.all(Radius.circular(5)),
                       ),
-                      child: const Text(
-                        "99.88%",
-                        style: TextStyle(
+                      child: Text(
+                        "$percentage %",
+                        style: const TextStyle(
                           fontSize: 15,
                           color: Colors.white,
                           fontWeight: FontWeight.w400
@@ -105,7 +113,10 @@ class DetectionCard extends StatelessWidget {
 }
 
 class DeleteCard extends StatelessWidget{
-  const DeleteCard({super.key});
+  final int id;
+  final String date;
+  final String imageUrl;
+  const DeleteCard({super.key, this.id=0, this.date="", required this.imageUrl});
 
   @override
   Widget build(BuildContext context) {
@@ -124,10 +135,11 @@ class DeleteCard extends StatelessWidget{
           fontWeight: FontWeight.bold
         ),
       ),
-      content: const Text(
-        "Guardado el 28/08/2023 - 14:30 PM",
+      content: Text(
+        'Guardado el $date',
+        //"Guardado el 28/08/2023 - 14:30 PM",
         textAlign: TextAlign.center,
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 14,
           color: Colors.black54,
           fontWeight: FontWeight.w400
@@ -135,7 +147,9 @@ class DeleteCard extends StatelessWidget{
       ),
       actions: [
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context);
+          },
           style: TextButton.styleFrom(
             foregroundColor: Colors.black26,
           ),
@@ -144,6 +158,7 @@ class DeleteCard extends StatelessWidget{
         const SizedBox(width: 20),
         ElevatedButton(
           onPressed: () {
+            deleteDetection(id, imageUrl);
             Navigator.pop(context);
           },
           style: ElevatedButton.styleFrom(

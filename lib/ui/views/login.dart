@@ -12,8 +12,6 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-  //final _formKey = GlobalKey<FormState>();
-
   String? errorMessage = '';
   bool loading = false;
 
@@ -39,7 +37,7 @@ class _LoginViewState extends State<LoginView> {
 
     } on FirebaseAuthException catch (e) {
       setState(() {
-        //errorMessage = e.message;
+        errorMessage = e.message;
         errorMessage = 'Error: No se ha podido iniciar sesión, valida las credenciales.';
 
         loading = false;
@@ -165,7 +163,6 @@ class _LoginViewState extends State<LoginView> {
                           print("Cargando...");
                           return null;
                         }
-                        //Navigator.push(context, MaterialPageRoute(builder: (context) => const ControlView()));
                       },
                       child: loading?
                         const CircularProgressIndicator(color: Colors.black, strokeWidth: 3,)

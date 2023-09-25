@@ -12,7 +12,6 @@ class RegisterView extends StatefulWidget {
 }
 
 class _RegisterViewState extends State<RegisterView> {
-  //final _formKey = GlobalKey<FormState>();
   String? errorMessage = '';
   bool loading = false;
 
@@ -47,7 +46,7 @@ class _RegisterViewState extends State<RegisterView> {
 
     } on FirebaseAuthException catch (e) {
       setState(() {
-        //errorMessage = e.message;
+        errorMessage = e.message;
         errorMessage = 'Error: No se ha podido registrar el usuario.';
         loading = false;
       });

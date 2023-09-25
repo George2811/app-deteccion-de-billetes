@@ -1,13 +1,47 @@
 import 'dart:io';
-import 'package:counterfeit_detector/ui/views/cameraFuntionality.dart';
+import 'package:counterfeit_detector/services/detection_service.dart';
+import 'package:counterfeit_detector/state/storage.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
-class DetectionView extends StatelessWidget {
+class DetectionView extends StatefulWidget {
   final File image; // El parámetro para pasar la imagen
   final Map<String, dynamic>? predictionResponse;
+  final int currencyId;
 
-  DetectionView({required this.image, required this.predictionResponse});
+  DetectionView({required this.image, required this.predictionResponse, required this.currencyId});
+
+  @override
+  State<DetectionView> createState() => _DetectionViewState();
+}
+
+class _DetectionViewState extends State<DetectionView> {
+  bool loading = false;
+
+  Future<void> _saveDetection(BuildContext context, String classification, double percentage) async {
+    setState(() {
+      loading = true;
+    });
+    String uniqueFileName = DateTime.now().millisecondsSinceEpoch.toString();
+    var snackBar;
+    try {
+      String imageUrl = await StoreData().uploadImageStorage("banknotes", uniqueFileName, widget.image);
+      var res = await saveDetection(widget.currencyId, classification, percentage, imageUrl);
+
+      String msg = "Se guardó la detección correctamente.";
+      snackBar = SnackBar(content: Text(msg, style: const TextStyle(color: Color.fromARGB(255, 22, 184, 49)),),backgroundColor: const Color.fromARGB(255, 0, 0, 0),);      
+    } catch (e) {
+      await StoreData().deleteImageStorage("banknotes", uniqueFileName);
+      String msg = "Error saving the detection.";
+      //print(msg);
+      snackBar = SnackBar(content: Text(msg, style: const TextStyle(color: Color.fromARGB(255, 255, 81, 68)),),backgroundColor: const Color.fromARGB(255, 0, 0, 0),);
+    }
+    setState(() {
+      loading = false;
+    });
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    // cambiar snackbar porque borra el bottom bar
+  }
 
   String extractMoneda(String value) {
     final RegExp solesRegExp = RegExp(r'soles', caseSensitive: false);
@@ -32,8 +66,8 @@ class DetectionView extends StatelessWidget {
   }
 
   String getMoneda() {
-    if (predictionResponse != null) {
-      String prediction = predictionResponse!["prediction"] ?? "";
+    if (widget.predictionResponse != null) {
+      String prediction = widget.predictionResponse!["prediction"] ?? "";
       return extractMoneda(prediction);
     }
     return '';
@@ -60,9 +94,9 @@ class DetectionView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String moneda = getMoneda();
-    String percentage = formatPercentage(predictionResponse);
-    double perValue = percentageValue(predictionResponse);
-    String veracity = getVeracity(predictionResponse?["prediction"]);
+    String percentage = formatPercentage(widget.predictionResponse);
+    double perValue = percentageValue(widget.predictionResponse);
+    String veracity = getVeracity(widget.predictionResponse?["prediction"]);
 
     return Scaffold(
       body: Column(children: [
@@ -90,7 +124,7 @@ class DetectionView extends StatelessWidget {
             width: 300,
             height: 300,
             child: Image.file(
-              image,
+              widget.image,
               fit: BoxFit.cover,
             ),
           ),
@@ -117,7 +151,7 @@ class DetectionView extends StatelessWidget {
             ),
             const SizedBox(width: 30),
             Text(
-              '${predictionResponse?["prediction"] ?? "N/A"}',
+              '${widget.predictionResponse?["prediction"] ?? "N/A"}',
               style:
                   const TextStyle(fontSize: 15.0, fontWeight: FontWeight.w600),
             ),
@@ -177,8 +211,21 @@ class DetectionView extends StatelessWidget {
               ),
             )),
         Center(
-          child: ElevatedButton(
-            onPressed: () {},
+          child: loading?
+          const SizedBox(
+            height: 30,
+            width: 30,
+            child: CircularProgressIndicator(color: Color.fromARGB(255, 2, 33, 10), strokeWidth: 3)
+          )
+          :
+          ElevatedButton(
+            onPressed: (){
+              if(!loading){
+                _saveDetection(context, widget.predictionResponse?["prediction"], perValue);
+              } else {
+                print("Cargando...");
+              }
+            },
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color.fromARGB(255, 2, 33, 10),
               padding:
