@@ -23,8 +23,9 @@ class _CameraFunctionalityViewState extends State<CameraFunctionalityView> {
   Future<void> _getImageFromCamera() async {
     final picker = ImagePicker();
     final pickedImage = await picker.pickImage(source: ImageSource.camera);
-
+    
     if (pickedImage != null) {
+      //Image.file(File(pickedImage.path), filterQuality: FilterQuality.none, cacheHeight: 66, cacheWidth: 55,);
       setState(() {
         isLoading = true;
         _imagePath = pickedImage.path;
