@@ -1,10 +1,13 @@
 import 'package:camera/camera.dart';
+import 'package:counterfeit_detector/colors.dart';
 import 'package:counterfeit_detector/state/appdata.dart';
 import 'package:counterfeit_detector/ui/views/home.dart';
 import 'package:counterfeit_detector/ui/views/splash.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:image/image.dart' as img;
+
 
 late List<CameraDescription> cameras;
 Future<void> main() async {
@@ -23,6 +26,7 @@ class MainApp extends StatelessWidget {
       //home: BottomNavBar(),
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        primarySwatch: primary,
         textSelectionTheme: const TextSelectionThemeData(
           cursorColor: Color.fromARGB(255, 1, 24, 7),
         ),
@@ -45,6 +49,7 @@ class CameraView extends StatefulWidget {
 
 class _CameraViewState extends State<CameraView> {
   late CameraController _controller;
+  late CameraImage _cameraImage;
 
   @override
   void initState() {
@@ -56,7 +61,17 @@ class _CameraViewState extends State<CameraView> {
       if(!mounted){
         return;
       }
-      setState((){});
+      //setState((){});
+      _controller.startImageStream((image) => _cameraImage = image);
+
+      /*
+      _controller.startImageStream((CameraImage availableImage) {
+        // process the frame here
+        _cameraImage = availableImage;
+      });
+      */
+
+
     }).catchError((Object e){
       if(e is CameraException){
         switch(e.code){
@@ -73,6 +88,11 @@ class _CameraViewState extends State<CameraView> {
       DeviceOrientation.landscapeLeft,
       DeviceOrientation.landscapeRight,
     ]);
+  }
+
+  void _capture(){
+    
+
   }
 
   @override

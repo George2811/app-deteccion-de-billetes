@@ -1,3 +1,4 @@
+import 'package:counterfeit_detector/colors.dart';
 import 'package:counterfeit_detector/state/auth.dart';
 import 'package:counterfeit_detector/ui/views/control.dart';
 import 'package:counterfeit_detector/ui/views/register.dart';
@@ -53,22 +54,40 @@ class _LoginViewState extends State<LoginView> {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget> [
-            Container(
-              height: 300,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("assets/cover.jpg"),
-                  fit: BoxFit.cover,
-                  colorFilter: ColorFilter.mode(
-                    Colors.black.withOpacity(0.7), // Ajusta el nivel de opacidad aquí
-                    BlendMode.darken, // El modo de mezcla, puedes ajustarlo según tus necesidades
+            Stack(children: <Widget>[
+              Container(
+                height: 340.0,
+                decoration: const BoxDecoration(
+                  //color: Colors.transparent,
+                  image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: AssetImage(
+                      'assets/portrait-v2.jpg',
+                    ),
                   ),
                 ),
               ),
-              child: Container(
-                alignment: Alignment.centerLeft,
-                padding: const EdgeInsets.all(25),
-                child: RichText(
+              Container(
+                height: 340.0,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    gradient: LinearGradient(
+                        begin: FractionalOffset.centerLeft,
+                        end: FractionalOffset.centerRight,
+                        colors: [
+                          Colors.black87,
+                          Colors.grey.withOpacity(0.0),
+                        ],
+                        stops: const [
+                          0.0,
+                          0.8
+                        ])),
+              ),
+              Container(
+                height: 340.0,
+                alignment: Alignment.bottomLeft,
+                padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 24),
+                child: RichText(                  
                   text: const TextSpan(
                     children: [
                       TextSpan(
@@ -76,15 +95,15 @@ class _LoginViewState extends State<LoginView> {
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
-                          fontSize: 30,
+                          fontSize: 24,
                         ),
                       ),
-                       TextSpan(
+                      TextSpan(
                         text: 'Inicia sesión con\n',
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
-                          fontSize: 30,
+                          fontSize: 24,
                         ),
                       ),
                       TextSpan(
@@ -92,14 +111,14 @@ class _LoginViewState extends State<LoginView> {
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
-                          fontSize: 30,
+                          fontSize: 24,
                         ),
-                      ),
+                      ),                      
                     ]
                   ),
                 ),
               ),
-            ),
+            ]),  
             Container(
               padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 40),
               child: Column(
@@ -113,21 +132,21 @@ class _LoginViewState extends State<LoginView> {
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderSide: const BorderSide(
-                          color: Color.fromARGB(255, 1, 24, 7),
+                          color: dark,
                           width: 2,
                         ),
                         borderRadius: BorderRadius.circular(18),
                       ),
                     ),
                   ),
-                  const SizedBox(height: 25),
+                  const SizedBox(height: 30),
                   TextFormField(
                     controller: _passwordController,
                     obscureText: passenable,
                     decoration: InputDecoration(
                       labelText: "Contraseña",
                       suffixIcon: IconButton(
-                        icon: Icon(passenable== true? Icons.remove_red_eye : Icons.visibility_off, size: 20, color: const Color.fromARGB(197, 10, 10, 10)),
+                        icon: Icon(passenable== true? Icons.remove_red_eye : Icons.visibility_off, size: 20, color: dark),
                         splashRadius: 15,
                         onPressed: (){
                           setState(() => passenable = !passenable);
@@ -138,20 +157,20 @@ class _LoginViewState extends State<LoginView> {
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderSide: const BorderSide(
-                          color: Color.fromARGB(255, 1, 24, 7),
+                          color: dark,
                           width: 2,
                         ),
                         borderRadius: BorderRadius.circular(18),
                       ),
                     ),
                   ),
-                  const SizedBox(height: 25),
+                  const SizedBox(height: 30),
                   SizedBox(
                     width: double.infinity,
                     height: 50,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromARGB(255, 165, 245, 115),
+                        backgroundColor: alternative,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(18),
                         ),
@@ -165,28 +184,28 @@ class _LoginViewState extends State<LoginView> {
                         }
                       },
                       child: loading?
-                        const CircularProgressIndicator(color: Colors.black, strokeWidth: 3,)
+                        const CircularProgressIndicator(color: dark, strokeWidth: 3,)
                         :
                         const Text(
                         "Ingresar",
                         style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 16,
+                          color: dark,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
                         ),
                       )
                     ),
                   ),
-                  const SizedBox(height: 25),
+                  const SizedBox(height: 30),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text("¿No tienes una cuenta? "),
+                      Text("¿No tienes una cuenta? ", style: TextStyle(color: dark[300]),),
                       InkWell(
                         child: const Text(
                           "Regístrate",
                           style: TextStyle(
-                            color: Color.fromARGB(255, 1, 24, 7),
+                            color: dark,
                             decoration: TextDecoration.underline,
                             fontWeight: FontWeight.bold
                           ),
