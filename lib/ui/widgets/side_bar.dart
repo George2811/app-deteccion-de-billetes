@@ -1,3 +1,4 @@
+import 'package:counterfeit_detector/colors.dart';
 import 'package:counterfeit_detector/state/auth.dart';
 import 'package:counterfeit_detector/ui/views/detections.dart';
 import 'package:counterfeit_detector/ui/views/login.dart';
@@ -24,28 +25,33 @@ class _SideBarState extends State<SideBar> {
         padding: EdgeInsets.zero,
         children: <Widget>[
           UserAccountsDrawerHeader(
-            accountName: Text(email??"correo.com"),
+            accountName: Text(email??"correo.com", style: const TextStyle(color: Colors.white)),
             accountEmail: const Text(""),
             currentAccountPicture: ClipOval(
               child:Image.asset(
-                "assets/logo_rounded.png",
+                "assets/rounded_logo_b.png",
                 fit: BoxFit.cover,
               )
             ),
             decoration: const BoxDecoration(
-              color: Colors.black
+              color: dark,
             ),
           ),
           ListTile(
             leading: const Icon(Icons.compare),
-            title: const Text("Mis detecciones"),
+            title: Text(
+              "Mis detecciones",
+              style: TextStyle(
+                color: dark[200],
+              ),
+            ),
             onTap: (){
               Navigator.push(context, MaterialPageRoute(builder: (context) => const DetectionsView()));
             },
           ),         
           ListTile(
             leading: const Icon(Icons.logout_rounded),
-            title: const Text("Cerra sesión"),
+            title: Text("Cerra sesión", style: TextStyle(color: dark[200]),),
             onTap: (){
               signOut();
               Navigator.of(context, rootNavigator: true)

@@ -73,7 +73,7 @@ class _RegisterViewState extends State<RegisterView> {
                   image: DecorationImage(
                     fit: BoxFit.cover,
                     image: AssetImage(
-                      'assets/portrait-v2.jpg',
+                      'assets/portrait.jpg',
                     ),
                   ),
                 ),

@@ -1,3 +1,4 @@
+import 'package:counterfeit_detector/colors.dart';
 import 'package:counterfeit_detector/state/appdata.dart';
 import 'package:counterfeit_detector/ui/views/guide.dart';
 import 'package:counterfeit_detector/ui/views/home.dart';
@@ -29,22 +30,22 @@ class _BottomNavBarState extends State<BottomNavBar> {
     List<PersistentBottomNavBarItem> _navBarsItems() {
       return [
         PersistentBottomNavBarItem(
-          icon: const Icon(Icons.home_rounded),
-          //title: ("Home"),
-          activeColorPrimary: const Color.fromARGB(255, 1, 24, 7),
-          inactiveColorPrimary: Colors.grey,
+          icon: const Icon(Icons.home_outlined),
+          title: ("Inicio"),
+          activeColorPrimary: alternative,
+          inactiveColorPrimary: dark[200],
         ),
         PersistentBottomNavBarItem(
-          icon: const Icon(Icons.compare, color: Color.fromARGB(255, 0, 234, 37),),
-          //title: ("Detección"),
-          activeColorPrimary: const Color.fromARGB(255, 1, 24, 7),
-          inactiveColorPrimary: const Color.fromARGB(255, 1, 24, 7),
+          icon: const Icon(Icons.compare),
+          title: ("Detector"),
+          activeColorPrimary: alternative,
+          inactiveColorPrimary: dark[200],
         ),
         PersistentBottomNavBarItem(
           icon: const Icon(Icons.feed_outlined),
-          //title: ("Guía"),
-          activeColorPrimary: const Color.fromARGB(255, 1, 24, 7),
-          inactiveColorPrimary: Colors.grey
+          title: ("Guías"),
+          activeColorPrimary: alternative,
+          inactiveColorPrimary: dark[200],
         ),
       ];
     }
@@ -59,7 +60,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
       items: _navBarsItems(),
       confineInSafeArea: true,
       hideNavigationBar: appData.showNavBar,
-      backgroundColor: Colors.white, // Default is Colors.white.
+      backgroundColor: const Color(0xFFEEFFF6), // Default is Colors.white.
       handleAndroidBackButtonPress: true, // Default is true.
       resizeToAvoidBottomInset: true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
       stateManagement: true, // Default is true.
@@ -68,6 +69,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
         borderRadius: BorderRadius.circular(10.0),
         colorBehindNavBar: Colors.white,
       ),
+      navBarHeight: 70,
+      padding: const NavBarPadding.only(bottom: 20),
       popAllScreensOnTapOfSelectedTab: true,
       popActionScreens: PopActionScreensType.all,
       itemAnimationProperties: const ItemAnimationProperties( // Navigation Bar's items animation properties.
@@ -79,7 +82,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
         curve: Curves.ease,
         duration: Duration(milliseconds: 200),
       ),
-      navBarStyle: NavBarStyle.style15, // Choose the nav bar style with this property.
+      navBarStyle: NavBarStyle.style6, // Choose the nav bar style with this property.
     );
   }
 }

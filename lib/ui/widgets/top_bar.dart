@@ -24,12 +24,13 @@ class TopBar extends StatelessWidget {
                 return Container(
                   padding: const EdgeInsets.all(7),
                   child: FloatingActionButton(
+                    elevation: 5,                    
                     onPressed: () => {
                       Scaffold.of(context).openDrawer()
                     },
                     child: ClipOval(
                       child: Image.asset(
-                        "assets/logo_rounded.png",
+                        "assets/rounded_logo_w.png",
                         fit: BoxFit.cover,
                       )
                     )

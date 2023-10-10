@@ -62,7 +62,7 @@ class _LoginViewState extends State<LoginView> {
                   image: DecorationImage(
                     fit: BoxFit.cover,
                     image: AssetImage(
-                      'assets/portrait-v2.jpg',
+                      'assets/portrait.jpg',
                     ),
                   ),
                 ),
