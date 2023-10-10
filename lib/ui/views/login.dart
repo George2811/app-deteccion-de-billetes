@@ -58,7 +58,6 @@ class _LoginViewState extends State<LoginView> {
               Container(
                 height: 340.0,
                 decoration: const BoxDecoration(
-                  //color: Colors.transparent,
                   image: DecorationImage(
                     fit: BoxFit.cover,
                     image: AssetImage(

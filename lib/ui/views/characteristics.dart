@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:counterfeit_detector/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'dart:convert';
@@ -57,7 +58,7 @@ class _CharacteristicsViewState extends State<CharacteristicsView> {
             ),
           ),
       body: CarouselSlider(
-        options: CarouselOptions(height: 600.0, viewportFraction: 0.9, enlargeCenterPage: true, enlargeFactor: 0.15),
+        options: CarouselOptions(height: 650.0, viewportFraction: 0.9, enlargeCenterPage: true, enlargeFactor: 0.15),
         items: characteristics.map((e) {
           return Builder(
             builder: (BuildContext context) {
@@ -68,7 +69,7 @@ class _CharacteristicsViewState extends State<CharacteristicsView> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ),
-                  color: const Color.fromARGB(255, 9, 20, 16),
+                  color: const Color.fromARGB(255, 1, 8, 7),
                   child: Column(
                     children: [
                       ClipRRect(
@@ -104,28 +105,35 @@ class _CharacteristicsViewState extends State<CharacteristicsView> {
                           children: [
                             Container(
                               alignment: Alignment.center,                   
-                              padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 10),
+                              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(6),
+                                color: alternative,
                               ),
                               child: Text(
                                 "${e['amount']?? 'Monto en'} ${widget.category.toLowerCase()}",
                                 style: const TextStyle(
-                                  fontWeight: FontWeight.w500,
+                                  fontWeight: FontWeight.w600,
                                   fontSize: 14,
                                 ),
                               ),
                             ),
                             const SizedBox(width: 20,),
-                            Text(
-                              "Edición: ${e['edition']}",
-                              style: const TextStyle(
-                                fontWeight: FontWeight.w400,
+                            Container(
+                              alignment: Alignment.center,                   
+                              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(6),
                                 color: Colors.white,
-                                fontSize: 14,
                               ),
-                            )
+                              child: Text(
+                                "${e['edition']?? 'Edición'}",
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -136,7 +144,9 @@ class _CharacteristicsViewState extends State<CharacteristicsView> {
                           e['description']?? "Hilo de seguridad con movimiento de anillos, que cambian de color fucsia a verde y el texto 100 BCRP calado. El hilo contiene elementos magnéticos por lo que es detectable por máquina.",
                           textAlign: TextAlign.justify,
                           style: const TextStyle(
-                            color: Color.fromARGB(255, 202, 202, 202),
+                            fontSize: 14,
+                            height: 1.5,
+                            color: Color.fromARGB(255, 235, 235, 235),
                           ),
                         ),
                       )

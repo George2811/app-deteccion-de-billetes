@@ -43,7 +43,7 @@ class GuideView extends StatelessWidget {
             const CurrencyCard(
               title: "Soles",
               description: "Moneda Nacional del Perú",
-              img: "assets/soles.jpg",
+              img: "assets/soles-card.jpg",
               flag: "assets/peru_flag.png",
               symbol: "S/"
             ),
@@ -51,7 +51,7 @@ class GuideView extends StatelessWidget {
             const CurrencyCard(
               title: "Dólares",
               description: "Moneda Oficial de los Estados Unidos",
-              img: "assets/dollars.jpg",
+              img: "assets/portrait.jpg",
               flag: "assets/usa_flag.png",
               symbol: "\$"
             ),

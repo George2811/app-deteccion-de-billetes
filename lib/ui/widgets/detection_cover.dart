@@ -1,3 +1,4 @@
+import 'package:counterfeit_detector/colors.dart';
 import 'package:counterfeit_detector/ui/views/select_currency.dart';
 import 'package:flutter/material.dart';
 
@@ -14,10 +15,10 @@ class DetectionCover extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.0),
           gradient: const LinearGradient(
-            begin: Alignment.centerRight,
-            end: Alignment.centerLeft,
-            stops: [0.7, 1],
-            colors: [Color.fromARGB(255, 1, 9, 3), Color.fromARGB(255, 2, 38, 12)],
+            begin: Alignment.center,
+            end: Alignment.centerRight,
+            stops: [0.1, 1],
+            colors: [dark, Colors.transparent],
           )
         ),
         width: 300,
@@ -26,10 +27,13 @@ class DetectionCover extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children:  <Widget>[
-            SizedBox(
-              width: 150,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 12),
+            Container(
+              height: 200,
+              width: 170,
+              alignment: Alignment.bottomLeft,
+              padding: const EdgeInsets.only(left: 16),
+              child: SizedBox(
+                height: 160,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -44,12 +48,14 @@ class DetectionCover extends StatelessWidget {
                     const SizedBox(height: 18),
                     const Text(
                       "Detecta la veracidad de tus billetes.",
-                      style: TextStyle(color: Colors.white, fontSize: 12),
+                      style: TextStyle(color: Colors.white, fontSize: 14),
                     ),
                     const SizedBox(height: 18),
                     ElevatedButton.icon(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromARGB(255, 2, 190, 30),
+                        backgroundColor: alternative,
+                        elevation: 0,
+                        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
                       ),
                       onPressed: () {
                         // LOS REDIRIGE A LA FUNCIONALIDAD DE DETECCIÓN DE BILLETES
@@ -62,24 +68,48 @@ class DetectionCover extends StatelessWidget {
                       icon: const Icon(
                         Icons.compare,
                         size: 20.0,
+                        color: Colors.white,
                       ),
-                      label: const Text('Empezar'),
+                      label: const Text('Empezar', style: TextStyle(color: Colors.white,),),
                     ),
                   ],
                 ),
               ),
             ),
-            ClipRRect(
-              borderRadius: const BorderRadius.only(
-                topRight: Radius.circular(10.0),
-                bottomRight: Radius.circular(10.0),
-              ),
-              child: Image.asset(
-                "assets/cover.jpg",
-                height: 200,
-                width: 150,
-                fit: BoxFit.fitHeight,
-              ),
+            Stack(
+              children: <Widget>[
+                ClipRRect(
+                  borderRadius: const BorderRadius.only(
+                    topRight: Radius.circular(10.0),
+                    bottomRight: Radius.circular(10.0),
+                  ),
+                  child: Image.asset(
+                    "assets/portrait.jpg",
+                    height: 200,
+                    width: 130,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                // TODO: Gradiente de la imagen en la card principal (Detector de billetes)
+                // Container(
+                //   height: 200.0,
+                //   decoration: BoxDecoration(
+                //     color: Colors.amber,
+                //     gradient: LinearGradient(
+                //       begin: FractionalOffset.centerLeft,
+                //       end: FractionalOffset.centerRight,
+                //       colors: [
+                //         Colors.red,
+                //         Color.fromARGB(255, 127, 5, 138).withOpacity(0.0),
+                //       ],
+                //       stops: const [
+                //         0.5,
+                //         0.9
+                //       ],
+                //     ),
+                //   ),
+                // ),
+              ],
             ),
           ],
         ),

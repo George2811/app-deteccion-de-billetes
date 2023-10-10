@@ -13,6 +13,8 @@ class CurrencyCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: const Color(0xFFEEFFF6),
+      elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
       ),
@@ -24,7 +26,7 @@ class CurrencyCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(10.0),
         child: SizedBox(
           width: 300,
-          height: 100,
+          height: 120,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -36,15 +38,15 @@ class CurrencyCard extends StatelessWidget {
                 ),
                 child: Image.asset(
                   img?? "https://www.ipe.org.pe/portal/wp-content/uploads/2020/03/retiro-CTS-finanzas.jpg",
-                  height: 100,
-                  width: 150,
+                  height: 120,
+                  width: 120,
                   fit: BoxFit.fitHeight,
                 ),
               ),
               SizedBox(
                 width: 150,
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                  padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 14),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -55,10 +57,10 @@ class CurrencyCard extends StatelessWidget {
                           fontSize: 16,
                         ),
                       ),
-                      const SizedBox(height: 3),
+                      const SizedBox(height: 5),
                       Text(
                         description?? "Descripción",
-                        style: const TextStyle(fontSize: 12),
+                        style: const TextStyle(fontSize: 14),
                       ),
                       const Spacer(),
                       Row(
@@ -70,7 +72,7 @@ class CurrencyCard extends StatelessWidget {
                           width: 30,
                         ),
                         const SizedBox(width: 4),
-                        Text(symbol?? ":)", style: const TextStyle(fontSize: 16)),
+                        Text(symbol?? ":)", style: const TextStyle(fontSize: 14)),
                         ],
                       )
                       ],
