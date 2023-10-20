@@ -9,7 +9,10 @@ class DetectionView extends StatefulWidget {
   final Map<String, dynamic>? predictionResponse;
   final int currencyId;
 
-  DetectionView({required this.image, required this.predictionResponse, required this.currencyId});
+  DetectionView(
+      {required this.image,
+      required this.predictionResponse,
+      required this.currencyId});
 
   @override
   State<DetectionView> createState() => _DetectionViewState();
@@ -18,22 +21,37 @@ class DetectionView extends StatefulWidget {
 class _DetectionViewState extends State<DetectionView> {
   bool loading = false;
 
-  Future<void> _saveDetection(BuildContext context, String classification, double percentage) async {
+  Future<void> _saveDetection(
+      BuildContext context, String classification, double percentage) async {
     setState(() {
       loading = true;
     });
     String uniqueFileName = DateTime.now().millisecondsSinceEpoch.toString();
     var snackBar;
     try {
-      String imageUrl = await StoreData().uploadImageStorage("banknotes", uniqueFileName, widget.image);
-      var res = await saveDetection(widget.currencyId, classification, percentage, imageUrl);
+      String imageUrl = await StoreData()
+          .uploadImageStorage("banknotes", uniqueFileName, widget.image);
+      var res = await saveDetection(
+          widget.currencyId, classification, percentage, imageUrl);
       String msg = "Se guardó la detección correctamente.";
-      snackBar = SnackBar(content: Text(msg, style: const TextStyle(color: Color.fromARGB(255, 22, 184, 49)),),backgroundColor: const Color.fromARGB(255, 0, 0, 0),);      
+      snackBar = SnackBar(
+        content: Text(
+          msg,
+          style: const TextStyle(color: Color.fromARGB(255, 22, 184, 49)),
+        ),
+        backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+      );
     } catch (e) {
       await StoreData().deleteImageStorage("banknotes", uniqueFileName);
       String msg = "Error saving the detection.";
       //print(msg);
-      snackBar = SnackBar(content: Text(msg, style: const TextStyle(color: Color.fromARGB(255, 255, 81, 68)),),backgroundColor: const Color.fromARGB(255, 0, 0, 0),);
+      snackBar = SnackBar(
+        content: Text(
+          msg,
+          style: const TextStyle(color: Color.fromARGB(255, 255, 81, 68)),
+        ),
+        backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+      );
     }
     setState(() {
       loading = false;
@@ -107,7 +125,9 @@ class _DetectionViewState extends State<DetectionView> {
                   color: Colors.black54, fontWeight: FontWeight.bold)),
           automaticallyImplyLeading: false,
           leading: GestureDetector(
-            onTap: () { Navigator.pop(context);},
+            onTap: () {
+              Navigator.pop(context);
+            },
             child: Container(
               margin: const EdgeInsets.only(left: 25.0),
               child: const Icon(
@@ -120,126 +140,123 @@ class _DetectionViewState extends State<DetectionView> {
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 0),
           child: SizedBox(
-            width: 300,
-            height: 300,
-            child: Image.file(
-              widget.image,
-              fit: BoxFit.cover,
-            ),
-          ),
+              width: 350,
+              height: 300,
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Image.file(
+                    widget.image,
+                    fit: BoxFit.cover,
+                  ),
+                  Positioned(
+                    bottom: 240,
+                    right: 15,
+                    child: Container(
+                      padding: const EdgeInsets.all(12.0),
+                      decoration: BoxDecoration(
+                        color: Colors.black.withOpacity(0.6),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Text(
+                        '${widget.predictionResponse?["prediction"] ?? "N/A"}',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              )),
         ),
-        const SizedBox(height: 10.0),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Container(
-              margin: const EdgeInsets.only(left: 110),
-              width: 94,
-              height: 34,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5.0),
-                  color: Colors.black),
-              child: const Text(
-                'Moneda',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16.0,
-                ),
+        const SizedBox(height: 0.0),
+        Positioned(
+          bottom: 0,
+          right: 0,
+          child: Container(
+            width: 350,
+            height: 96,
+            decoration:  BoxDecoration(
+              color:  veracity == 'Verdadero'
+                      ? const Color.fromRGBO(32, 136, 103, 1)
+                      : const Color.fromRGBO(217, 97, 100, 1),
+              
+                borderRadius:const BorderRadius.only(
+                bottomLeft: Radius.circular(15.0),
+                bottomRight: Radius.circular(15.0),
               ),
             ),
-            const SizedBox(width: 30),
-            Text(
-              '${widget.predictionResponse?["prediction"] ?? "N/A"}',
-              style:
-                  const TextStyle(fontSize: 15.0, fontWeight: FontWeight.w600),
-            ),
-          ],
-        ),
-        const SizedBox(height: 10.0),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Container(
-              margin: const EdgeInsets.only(left: 110),
-              width: 94,
-              height: 34,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5.0),
-                  color: Colors.black),
-              child: const Text(
-                'Predicción',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16.0,
-                ),
-              ),
-            ),
-            const SizedBox(width: 30),
-            Text(
-              veracity,
-              style: TextStyle(
-                  fontSize: 15.0,
-                  fontWeight: FontWeight.w600,
-                  color: veracity == 'Verdadero'
-                      ? const Color.fromARGB(255, 33, 134, 7)
-                      : const Color.fromARGB(255, 182, 33, 23)),
-            ),
-          ],
-        ),
-        const SizedBox(height: 20.0),
-        CircularPercentIndicator(
-            radius: 40.0,
-            lineWidth: 7.0,
-            percent: perValue,
-            center: Text(
-              percentage,
-              style:
-                  const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-            ),
-            progressColor: veracity == 'Verdadero'
-                ? const Color.fromARGB(255, 33, 134, 7)
-                : const Color.fromARGB(255, 182, 33, 23)),
-        Padding(
-            padding:const EdgeInsets.symmetric(horizontal: 40.0, vertical: 23.0),
             child: Center(
-              child: Text(
-                'En base a la imagen, se predice con un $percentage de seguridad que el billete es ${veracity.toLowerCase()}',
-                style: const TextStyle(fontSize: 14.0, color: Colors.black54),
-              ),
+                child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Padding(
+                 padding: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
+                  child:
+                  Text(
+                    veracity,
+                    textAlign: TextAlign.left,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 22.0,
+                      fontWeight: FontWeight.bold,
+                    )
+                ), 
+                ),
+                Padding(
+                 padding:  const EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
+                child: 
+                Text(
+                '$percentage de seguridad',
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.bold,
+                    )
+                    ), 
+               ) ,
+               
+              ],
             )),
-        Center(
-          child: loading?
-          const SizedBox(
-            height: 30,
-            width: 30,
-            child: CircularProgressIndicator(color: Color.fromARGB(255, 2, 33, 10), strokeWidth: 3)
-          )
-          :
-          ElevatedButton(
-            onPressed: (){
-              if(!loading){
-                _saveDetection(context, widget.predictionResponse?["prediction"], perValue);
-              } else {
-                print("Cargando...");
-              }
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color.fromARGB(255, 2, 33, 10),
-              padding:
-                  const EdgeInsets.symmetric(vertical: 12, horizontal: 60.0),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15.0)),
-            ),
-            child: const Text(
-              'Guardar',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 16.0,
-              ),
-            ),
           ),
+        ),
+        const SizedBox(height: 180.0),
+       
+   
+        
+        Center(
+          child: loading
+              ? const SizedBox(
+                  height: 30,
+                  width: 30,
+                  child: CircularProgressIndicator(
+                      color: Color.fromARGB(255, 2, 33, 10), strokeWidth: 3))
+              : ElevatedButton(
+                  onPressed: () {
+                    if (!loading) {
+                      _saveDetection(context,
+                          widget.predictionResponse?["prediction"], perValue);
+                    } else {
+                      print("Cargando...");
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromARGB(255, 1, 204, 97),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 20, horizontal: 150.0),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0)),
+                  ),
+                  child: const Text(
+                    'Guardar',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16.0,
+                    ),
+                  ),
+                ),
         )
       ]),
     );
