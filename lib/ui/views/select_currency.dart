@@ -64,12 +64,13 @@ class _SelectCurrencyState extends State<SelectCurrency> {
               ),
             ),
             Container(
-              width: 300,
+              width: 345,
               margin: const EdgeInsets.only(top: 10, bottom: 15),
               child: const Text(
-                "Favor, selecciona el tipo de moneda a detectar",
+                "selecciona el tipo de moneda a detectar",
                 style: TextStyle(
                   color: Colors.black54,
+                  fontSize: 16.0,
                 ),
               ),
             ),
@@ -88,14 +89,14 @@ class _SelectCurrencyState extends State<SelectCurrency> {
                   Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const CameraFunctionalityView(currencyId: 1,)));
                 },
                 child: Container(
-                  height: 160,
-                  width: 300,
+                  height: 104,
+                  width: 345,
                   alignment: Alignment.centerLeft,
                   padding: const EdgeInsets.only(left: 20),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.0),
                     image: DecorationImage(
-                      image: const AssetImage("assets/soles.jpg"),
+                      image: const AssetImage("assets/sol-money.jpg"),
                       fit: BoxFit.cover,
                       colorFilter: ColorFilter.mode(
                         _backgroundColor1,
@@ -153,14 +154,14 @@ class _SelectCurrencyState extends State<SelectCurrency> {
                   Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const CameraView()));
                 },
                 child: Container(
-                  height: 160,
-                  width: 300,
+                  height: 104,
+                  width: 345,
                   alignment: Alignment.centerLeft,
                   padding: const EdgeInsets.only(left: 20),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.0),
                     image: DecorationImage(
-                      image: const AssetImage("assets/dollars.jpg"),
+                      image: const AssetImage("assets/dolar-money.jpg"),
                       fit: BoxFit.cover,
                       colorFilter: ColorFilter.mode(
                         _backgroundColor2,
@@ -201,10 +202,10 @@ class _SelectCurrencyState extends State<SelectCurrency> {
                 ),
               ),
             ),
-            const SizedBox(height: 50,),
+            const SizedBox(height: 20,),
             Container(
               height: 160,
-              width: 300,
+              width: 345,
               padding: const EdgeInsets.symmetric(horizontal: 2),
               child: const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

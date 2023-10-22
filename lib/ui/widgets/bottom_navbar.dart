@@ -60,7 +60,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
       items: _navBarsItems(),
       confineInSafeArea: true,
       hideNavigationBar: appData.showNavBar,
-      backgroundColor: const Color(0xFFEEFFF6), // Default is Colors.white.
+      backgroundColor:Color(0xFFEEFFF6), // Default is Colors.white.
       handleAndroidBackButtonPress: true, // Default is true.
       resizeToAvoidBottomInset: true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
       stateManagement: true, // Default is true.

@@ -137,96 +137,101 @@ class _DetectionViewState extends State<DetectionView> {
             ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 0),
+        Container(
+          width: 345,
+          height: 470,
+          alignment: Alignment.center,
           child: SizedBox(
-              width: 350,
-              height: 300,
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  Image.file(
-                    widget.image,
-                    fit: BoxFit.cover,
+            width: double.infinity,
+            height: double.infinity,
+            child: Stack(
+              children: [
+                ClipRRect(
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(15.0),
+                    topRight: Radius.circular(15.0),
                   ),
-                  Positioned(
-                    bottom: 240,
-                    right: 15,
-                    child: Container(
-                      padding: const EdgeInsets.all(12.0),
-                      decoration: BoxDecoration(
-                        color: Colors.black.withOpacity(0.6),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Text(
-                        '${widget.predictionResponse?["prediction"] ?? "N/A"}',
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 14.0,
-                          fontWeight: FontWeight.bold,
-                        ),
+                  child: Image.file(
+                    widget.image,
+                    width: 345,
+                    height: 470,
+                    fit: BoxFit.fill,
+                  ),
+                ),
+                Positioned(
+                  bottom: 410,
+                  right: 20,
+                  child: Container(
+                    padding: const EdgeInsets.all(12.0),
+                    decoration: BoxDecoration(
+                      color: Colors.black.withOpacity(0.3),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Text(
+                      '${widget.predictionResponse?["prediction"] ?? "N/A"}',
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 14.0,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                  )
-                ],
-              )),
-        ),
-        const SizedBox(height: 0.0),
-        Positioned(
-          bottom: 0,
-          right: 0,
-          child: Container(
-            width: 350,
-            height: 96,
-            decoration:  BoxDecoration(
-              color:  veracity == 'Verdadero'
-                      ? const Color.fromRGBO(32, 136, 103, 1)
-                      : const Color.fromRGBO(217, 97, 100, 1),
-              
-                borderRadius:const BorderRadius.only(
-                bottomLeft: Radius.circular(15.0),
-                bottomRight: Radius.circular(15.0),
-              ),
-            ),
-            child: Center(
-                child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Padding(
-                 padding: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
-                  child:
-                  Text(
-                    veracity,
-                    textAlign: TextAlign.left,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 22.0,
-                      fontWeight: FontWeight.bold,
-                    )
-                ), 
-                ),
-                Padding(
-                 padding:  const EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
-                child: 
-                Text(
-                '$percentage de seguridad',
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.bold,
-                    )
-                    ), 
-               ) ,
-               
+                  ),
+                )
               ],
-            )),
+            ),
           ),
         ),
-        const SizedBox(height: 180.0),
-       
-   
-        
-        Center(
+        const SizedBox(height: 0.0),
+        Container(
+          width: 345,
+          height: 96,
+          alignment: Alignment.centerLeft,
+          decoration: BoxDecoration(
+            color: veracity == 'Verdadero'
+                ? const Color.fromRGBO(32, 136, 103, 1)
+                : const Color.fromRGBO(217, 97, 100, 1),
+            borderRadius: const BorderRadius.only(
+              bottomLeft: Radius.circular(15.0),
+              bottomRight: Radius.circular(15.0),
+            ),
+          ),
+          child: Column(
+            crossAxisAlignment:
+                CrossAxisAlignment.start, // Alinea los elementos a la izquierda
+
+            children: [
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Padding(
+                  padding: const EdgeInsets.only ( top: 20,bottom: 5,left: 15
+                      ),
+                  child: Text('Potencialmente $veracity',
+                      textAlign: TextAlign.left,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 22.0,
+                        fontWeight: FontWeight.bold,
+                      )),
+                ),
+              ),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 1, horizontal: 15),
+                  child: Text('$percentage de seguridad',
+                      textAlign: TextAlign.left,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 16.0,
+                      )),
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 10.0),
+        Container(
           child: loading
               ? const SizedBox(
                   height: 30,
@@ -245,9 +250,9 @@ class _DetectionViewState extends State<DetectionView> {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color.fromARGB(255, 1, 204, 97),
                     padding: const EdgeInsets.symmetric(
-                        vertical: 20, horizontal: 150.0),
+                        vertical: 20, horizontal: 140.0),
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0)),
+                        borderRadius: BorderRadius.circular(10.0)),
                   ),
                   child: const Text(
                     'Guardar',
@@ -262,100 +267,3 @@ class _DetectionViewState extends State<DetectionView> {
     );
   }
 }
-
-
-// Row(
-//           children: [
-//             Padding(
-//               padding: const EdgeInsets.only(left: 90.0,right: 10.0, bottom: 3.0),
-//               child: Container(
-//                 padding: const EdgeInsets.only( left:8.0,right:22.0,bottom: 8.0,top: 8.0),
-//                 decoration: BoxDecoration(
-//                   borderRadius: BorderRadius.circular(5.0),
-//                   color: Colors.black
-//                 ),
-//                 child: const Text(
-//                   'Moneda',
-//                   style: TextStyle(
-//                     color: Colors.white,
-//                     fontSize: 16.0,
-//                   ),
-//                 ),
-//               ),
-//             ),
-//             Expanded(
-//               child: Align(
-//                 alignment: Alignment.centerLeft,
-//                 child: Text(
-//                   moneda,
-//                   style: const TextStyle(
-//                       fontSize: 15.0, fontWeight: FontWeight.w600),
-//                 ),
-//               ),
-//             )
-//           ],
-//         ),
-//         Row(
-//           children: [
-//             Padding(
-//               padding:
-//                   const EdgeInsets.only(left: 90.0,right: 10.0, bottom: 3.0),
-//               child: Container(
-//                 decoration: BoxDecoration(
-//                     borderRadius: BorderRadius.circular(5.0),
-//                     color: Colors.black),
-//                 padding: const EdgeInsets.all(8.0),
-//                 child: const Text(
-//                   'Predicción',
-//                   style: TextStyle(
-//                     color: Colors.white,
-//                     fontSize: 16.0,
-//                   ),
-//                 ),
-//               ),
-//             ),
-//             Expanded(
-//                 child: Align(
-//               alignment: Alignment.centerLeft,
-//               child: Text(
-//                 '${predictionResponse?["prediction"] ?? "N/A"}',
-//                 //'Porcentaje:${predictionResponse?["percetange"] ?? "N/A"}',
-//                 style:
-//                     const TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
-//               ),
-//             ))
-//           ],
-//         ),
-//         const SizedBox(height: 10.0),
-//         CircularPercentIndicator(
-//           radius: 40.0,
-//           lineWidth: 7.0,
-//           percent: perValue,
-//           center:  Text(
-//             percentage,
-//             style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-//           ),
-//           progressColor: const Color.fromARGB(255, 33, 134, 7),
-//         ),
-//         const SizedBox(height: 20.0),
-//         Padding(
-//           padding: EdgeInsets.symmetric(horizontal: 40.0, vertical: 3.0),
-//           child: Center(
-//             child: Text(
-//               'En base a la imagen, se predice con un $percentage de seguridad que el billete es $veracity',
-//               style: const TextStyle(fontSize: 14.0, color: Colors.black54),
-//             ),
-//           )
-//         ),
-//         Center(
-//           child: ElevatedButton(
-//             onPressed: () {},
-//             style: ElevatedButton.styleFrom(
-//                 backgroundColor: Colors.black,
-//                 shape: RoundedRectangleBorder(
-//                     borderRadius: BorderRadius.circular(10.0)),
-//                 padding: const EdgeInsets.symmetric(horizontal: 80.0)),
-//             child: const Text('Guardar'),
-//           ),
-//         )
-      
