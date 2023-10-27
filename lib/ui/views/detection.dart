@@ -22,7 +22,7 @@ class _DetectionViewState extends State<DetectionView> {
   bool loading = false;
 
   Future<void> _saveDetection(
-      BuildContext context, String classification, double percentage) async {
+    BuildContext context, String classification, double percentage) async {
     setState(() {
       loading = true;
     });
@@ -139,7 +139,7 @@ class _DetectionViewState extends State<DetectionView> {
         ),
         Container(
           width: 345,
-          height: 470,
+          height: 410,
           alignment: Alignment.center,
           child: SizedBox(
             width: double.infinity,
@@ -154,12 +154,12 @@ class _DetectionViewState extends State<DetectionView> {
                   child: Image.file(
                     widget.image,
                     width: 345,
-                    height: 470,
+                    height: 410,
                     fit: BoxFit.fill,
                   ),
                 ),
                 Positioned(
-                  bottom: 410,
+                  bottom: 350,
                   right: 20,
                   child: Container(
                     padding: const EdgeInsets.all(12.0),
@@ -230,7 +230,7 @@ class _DetectionViewState extends State<DetectionView> {
             ],
           ),
         ),
-        const SizedBox(height: 10.0),
+        const SizedBox(height: 40.0),
         Container(
           child: loading
               ? const SizedBox(

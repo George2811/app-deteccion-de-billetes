@@ -89,7 +89,7 @@ class _SelectCurrencyState extends State<SelectCurrency> {
                   Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const CameraFunctionalityView(currencyId: 1,)));
                 },
                 child: Container(
-                  height: 104,
+                  height: 144,
                   width: 345,
                   alignment: Alignment.centerLeft,
                   padding: const EdgeInsets.only(left: 20),
@@ -154,7 +154,7 @@ class _SelectCurrencyState extends State<SelectCurrency> {
                   Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const CameraView()));
                 },
                 child: Container(
-                  height: 104,
+                  height: 144,
                   width: 345,
                   alignment: Alignment.centerLeft,
                   padding: const EdgeInsets.only(left: 20),

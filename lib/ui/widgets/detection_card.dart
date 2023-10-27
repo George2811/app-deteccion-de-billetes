@@ -1,3 +1,4 @@
+import 'package:counterfeit_detector/colors.dart';
 import 'package:counterfeit_detector/services/detection_service.dart';
 import 'package:flutter/material.dart';
 
@@ -10,10 +11,16 @@ class DetectionCard extends StatelessWidget {
 
   const DetectionCard({super.key, this.id=0, this.image="https://www.ipe.org.pe/portal/wp-content/uploads/2020/03/retiro-CTS-finanzas.jpg", this.classification="", this.percentage="", this.date=""});
 
+  bool getColor() {
+    return classification.contains("also");
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
       margin: const EdgeInsets.only(bottom: 18),
+      elevation: 0,
+      color: const Color.fromARGB(255, 235, 238, 236),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
       ),
@@ -33,8 +40,9 @@ class DetectionCard extends StatelessWidget {
           child: Column(
             children: [
               ClipRRect(
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(10.0),
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(10.0),
+                  topRight: Radius.circular(10.0),
                 ),
                 child: Image.network(
                   image,
@@ -47,17 +55,16 @@ class DetectionCard extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 14),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
-                          width: 105,
+                          width: 125,
                           height: 28,
                           alignment: Alignment.center,
-                          decoration: const BoxDecoration(
-                            color: Color.fromARGB(234, 4, 43, 14),
+                          decoration: BoxDecoration(
+                            color: getColor() ? const Color.fromRGBO(217, 97, 100, 1) : const Color.fromRGBO(32, 136, 103, 1),
                             borderRadius: BorderRadius.all(Radius.circular(5)),
                           ),
                           child: Text(
@@ -69,7 +76,7 @@ class DetectionCard extends StatelessWidget {
                             ),
                           ),
                         ),
-                        const SizedBox(height: 8,),
+                        const SizedBox(height: 6,),
                         Container(
                           margin: const EdgeInsets.only(left: 2),
                           child: Text(
@@ -77,20 +84,21 @@ class DetectionCard extends StatelessWidget {
                             //"28/08/2023 - 14:30 PM",
                             style: const TextStyle(
                               fontSize: 15,
-                              color: Colors.black54,
+                              color: Colors.black87,
                               fontWeight: FontWeight.w400,
                             ),
                           ),
                         ),
                       ],
                     ),
+                    Container(width: 15,),
                     Container(
                       width: 66,
                       height: 28,
                       alignment: Alignment.center,
-                      decoration: const BoxDecoration(
-                        color: Colors.black87,
-                        borderRadius: BorderRadius.all(Radius.circular(5)),
+                      decoration: BoxDecoration(
+                        color: dark.shade300,
+                        borderRadius: const BorderRadius.all(Radius.circular(5)),
                       ),
                       child: Text(
                         "$percentage %",
@@ -163,9 +171,9 @@ class DeleteCard extends StatelessWidget{
           },
           style: ElevatedButton.styleFrom(
             elevation: 1,
-            backgroundColor: const Color.fromARGB(232, 220, 37, 37),
+            backgroundColor: const Color.fromRGBO(217, 97, 100, 1),
           ),
-          child: const Text('Eliminar'),
+          child: const Text('Eliminar', style: TextStyle(color: Colors.white)),
         ),
       ],
     );

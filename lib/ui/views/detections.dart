@@ -74,7 +74,7 @@ class _DetectionsViewState extends State<DetectionsView> with TickerProviderStat
           ),
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 24),
-            height: 640,
+            height: 610,
             child: TabBarView(
               controller: _tabController,
               children: [

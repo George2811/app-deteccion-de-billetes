@@ -11,7 +11,7 @@ Future<Map<String, dynamic>> saveDetection(
   String imageUrl
   ) async {
 
-  var url = Uri.parse('https://safycash-api-je3ddljhia-rj.a.run.app/detections');
+  var url = Uri.parse('http://20.114.81.59:8000/detections');
   String? userId = Auth().currentUser?.uid;
 
   var now = DateTime.now();
@@ -46,7 +46,7 @@ Future<Map<String, dynamic>> saveDetection(
 Future<List<Map<String, dynamic>>> listDetectionsByUser() async {
   String? userId = Auth().currentUser?.uid;
   
-  var url = Uri.parse('https://safycash-api-je3ddljhia-rj.a.run.app/detections/user/$userId');
+  var url = Uri.parse('http://20.114.81.59:8000/detections/user/$userId');
 
   final response = await http.get(
     url,
@@ -73,7 +73,7 @@ Future<String> deleteDetection(
   ) async {
 
   String? userId = Auth().currentUser?.uid;
-  var url = Uri.parse('https://safycash-api-je3ddljhia-rj.a.run.app/detections/user/$userId/$detectionId');
+  var url = Uri.parse('http://20.114.81.59:8000/detections/user/$userId/$detectionId');
 
   final response = await http.delete(
     url,

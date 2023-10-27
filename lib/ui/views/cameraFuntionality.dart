@@ -67,7 +67,7 @@ class _CameraFunctionalityViewState extends State<CameraFunctionalityView> {
           _prediction = predictionResponse;
           isLoading = false;
         });
-
+        print("Llego a hacer el request");
         File imageFile = File(pickedImage.path);
         _navigateToDetectionView(imageFile, _prediction);
       } catch (e) {
@@ -89,7 +89,8 @@ class _CameraFunctionalityViewState extends State<CameraFunctionalityView> {
   }
 
   void _navigateToDetectionView(
-      File imageFile, Map<String, dynamic>? predictionResponse) {
+    File imageFile, Map<String, dynamic>? predictionResponse) {
+    print("Redirige a la vista de resultados");
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -155,14 +156,14 @@ class _CameraFunctionalityViewState extends State<CameraFunctionalityView> {
                     _getImageFromCamera();
                   },
                   child: Container(
-                    height: 104,
+                    height: 144,
                     width: 345,
                     alignment: Alignment.centerLeft,
                     padding: const EdgeInsets.only(left: 20),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8.0),
                       image: DecorationImage(
-                        image: const AssetImage("assets/detecction-type.jpg"),
+                        image: const AssetImage("assets/camera.jpg"),
                         fit: BoxFit.cover,
                         colorFilter: ColorFilter.mode(
                           Colors.black.withOpacity(0.4),
@@ -194,14 +195,14 @@ class _CameraFunctionalityViewState extends State<CameraFunctionalityView> {
                     _getImageFromGallery();
                   },
                   child: Container(
-                    height: 104,
+                    height: 144,
                     width: 345,
                     alignment: Alignment.centerLeft,
                     padding: const EdgeInsets.only(left: 20),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8.0),
                       image: DecorationImage(
-                        image: const AssetImage("assets/detecction-type.jpg"),
+                        image: const AssetImage("assets/gallery.jpg"),
                         fit: BoxFit.cover,
                         colorFilter: ColorFilter.mode(
                           Colors.black.withOpacity(0.4),
@@ -231,14 +232,14 @@ class _CameraFunctionalityViewState extends State<CameraFunctionalityView> {
                   borderRadius: BorderRadius.circular(10.0),
                   onTap: () {},
                   child: Container(
-                    height: 104,
+                    height: 144,
                     width: 345,
                     alignment: Alignment.centerLeft,
                     padding: const EdgeInsets.only(left: 20),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10.0),
                       image: DecorationImage(
-                        image: const AssetImage("assets/detecction-type.jpg"),
+                        image: const AssetImage("assets/scanner.jpg"),
                         fit: BoxFit.cover,
                         colorFilter: ColorFilter.mode(
                           Colors.black.withOpacity(0.4),
