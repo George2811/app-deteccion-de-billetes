@@ -1,3 +1,4 @@
+import 'package:counterfeit_detector/colors.dart';
 import 'package:counterfeit_detector/main.dart';
 import 'package:counterfeit_detector/state/appdata.dart';
 import 'package:counterfeit_detector/ui/views/cameraFuntionality.dart';
@@ -67,7 +68,7 @@ class _SelectCurrencyState extends State<SelectCurrency> {
               width: 345,
               margin: const EdgeInsets.only(top: 10, bottom: 15),
               child: const Text(
-                "selecciona el tipo de moneda a detectar",
+                "Selecciona el tipo de moneda a detectar",
                 style: TextStyle(
                   color: Colors.black54,
                   fontSize: 16.0,
@@ -202,27 +203,27 @@ class _SelectCurrencyState extends State<SelectCurrency> {
                 ),
               ),
             ),
-            const SizedBox(height: 20,),
+            const SizedBox(height: 30,),
             Container(
-              height: 160,
+              height: 150,
               width: 345,
               padding: const EdgeInsets.symmetric(horizontal: 2),
-              child: const Column(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     'Nota\n',
                     style: TextStyle(
-                      color: Colors.black54,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14,
+                      color: dark[200],
+                      fontWeight: FontWeight.w500,
+                      fontSize: 16,
                     ),
                   ),
                   Text(
                     'Para el correcto funcionamiento del modelo, captura la imágen en un sitio con la iluminación adecuada. Además, la resolución de la cámara debe ser como mínimo de 12MP.',
                     textAlign: TextAlign.justify,
                     style: TextStyle(
-                      color: Colors.black54,
+                      color: dark[200],
                       fontWeight: FontWeight.w400,
                       fontSize: 14,
                     ),

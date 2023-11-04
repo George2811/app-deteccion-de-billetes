@@ -1,3 +1,4 @@
+import 'package:counterfeit_detector/colors.dart';
 import 'package:counterfeit_detector/services/prediction_service.dart';
 import 'package:counterfeit_detector/ui/views/detection.dart';
 import 'package:counterfeit_detector/ui/views/select_currency.dart';
@@ -19,6 +20,21 @@ class _CameraFunctionalityViewState extends State<CameraFunctionalityView> {
   String _imagePath = '';
   bool isLoading = false;
   Map<String, dynamic>? _prediction;
+  
+  @override
+  void initState() {
+    _showOpenDialog(_){
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return const RecomendationCard();
+        },
+      );
+    };
+
+    WidgetsBinding.instance.addPostFrameCallback(_showOpenDialog);
+    super.initState();    
+  }
 
   Future<void> _getImageFromCamera() async {
     final picker = ImagePicker();
@@ -61,8 +77,19 @@ class _CameraFunctionalityViewState extends State<CameraFunctionalityView> {
       });
 
       try {
-        var predictionResponse = await predictImage(pickedImage.path);
-
+        //var predictionResponse = await predictImage(pickedImage.path);
+        var predictionResponse = {
+          "edition": 2009,
+          "value": "20 soles",
+          "prediction": "falso",
+          "percentage": 0.6865,
+          "details": {
+            'marca_de_agua': 0.7792073488235474,
+            'microimpresiones': 0.7578911185264587,
+            'figuras_en_movimiento': 0.20,
+            'hilo_de_seguridad': 0.7831177115440369, 
+          }
+        };
         setState(() {
           _prediction = predictionResponse;
           isLoading = false;
@@ -106,7 +133,7 @@ class _CameraFunctionalityViewState extends State<CameraFunctionalityView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SingleChildScrollView(
+      body: SingleChildScrollView(
       child: Stack(
         children: [
           Column(
@@ -290,5 +317,61 @@ class _CameraFunctionalityViewState extends State<CameraFunctionalityView> {
         ],
       ),
     ));
+  }
+}
+
+class RecomendationCard extends StatelessWidget{
+  final String msg = "La funcionalidad basada en IA apoya en la detección de cuatro elementos de seguridad presentes en los billetes. Sin embargo, se recomienda complementar dicha información con la inspección manual del billete por parte del usuario. Para ello, es necesario conocer los elementos y técnicas para identificarlos, los cuales se muestran en la sección Guía. Safycash invita al usuario a considerar estos aspecto para una toma de decisiones acertada.";
+  const RecomendationCard({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      actionsAlignment: MainAxisAlignment.center,
+      actionsPadding: const EdgeInsets.only(bottom: 20),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20.0),
+      ),
+      title: Row(
+        children: [
+          Icon(
+            Icons.info_outline,
+            color: dark[300],
+          ),
+          const SizedBox(width: 10,),
+          Text(
+            "Recomendaciones",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 16,
+              color: dark[300],
+              fontWeight: FontWeight.bold
+            ),
+          ),
+        ],
+      ),
+      content: Text(
+        msg,
+        textAlign: TextAlign.center,
+        style: const TextStyle(
+          height: 1.3,
+          fontSize: 14,
+          color: Colors.black54,
+          fontWeight: FontWeight.w400
+        ),
+      ),
+      actions: [
+        ElevatedButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          style: ElevatedButton.styleFrom(
+            elevation: 1,
+            backgroundColor: const Color.fromARGB(255, 1, 204, 97),
+          ),
+          child: const Text('Entendido', style: TextStyle(color: Colors.white)),
+        ),
+      ],
+    );
   }
 }
