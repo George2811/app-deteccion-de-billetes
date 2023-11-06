@@ -77,9 +77,9 @@ class _CameraFunctionalityViewState extends State<CameraFunctionalityView> {
       });
 
       try {
-        //var predictionResponse = await predictImage(pickedImage.path);
-        var predictionResponse = {
-          "edition": 2009,
+        var predictionResponse = await predictImage(pickedImage.path);
+        /*var predictionResponse = {
+          "edition": 2021,
           "value": "20 soles",
           "prediction": "falso",
           "percentage": 0.6865,
@@ -89,7 +89,20 @@ class _CameraFunctionalityViewState extends State<CameraFunctionalityView> {
             'figuras_en_movimiento': 0.20,
             'hilo_de_seguridad': 0.7831177115440369, 
           }
-        };
+        };*/
+
+        /*var predictionResponse = {
+          "edition": 2009,
+          "value": "20 soles",
+          "prediction": "falso",
+          "percentage": 0.6865,
+          "details": {
+            'marca_de_aguas': 0.7792073488235474,
+            'microimpresioness': 0.7578911185264587,
+            'numero_ocultos': 0.20,
+            'hilo_de_seguridads': 0.7831177115440369, 
+          }
+        };*/
         setState(() {
           _prediction = predictionResponse;
           isLoading = false;

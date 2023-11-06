@@ -20,6 +20,7 @@ class DetectionView extends StatefulWidget {
   State<DetectionView> createState() => _DetectionViewState();
 }
 
+
 class _DetectionViewState extends State<DetectionView> {
   bool loading = false;
   bool _isOpen = false;
@@ -63,18 +64,7 @@ class _DetectionViewState extends State<DetectionView> {
     // cambiar snackbar porque borra el bottom bar
   }
 
-  String extractMoneda(String value) {
-    final RegExp solesRegExp = RegExp(r'soles', caseSensitive: false);
-    final RegExp dolaresRegExp = RegExp(r'dólares', caseSensitive: false);
-
-    if (solesRegExp.hasMatch(value)) {
-      return 'Soles';
-    } else if (dolaresRegExp.hasMatch(value)) {
-      return 'Dólares';
-    } else {
-      return '';
-    }
-  }
+ 
 
   // String getVeracity(String value) {
   //   final RegExp falseRegExp = RegExp(r'falso', caseSensitive: false);
@@ -87,8 +77,8 @@ class _DetectionViewState extends State<DetectionView> {
 
   String getMoneda() {
     if (widget.predictionResponse != null) {
-      String prediction = widget.predictionResponse!["prediction"] ?? "";
-      return extractMoneda(prediction);
+      String prediction = widget.predictionResponse!["value"] ?? "";
+      return prediction;
     }
     return '';
   }
@@ -109,6 +99,9 @@ class _DetectionViewState extends State<DetectionView> {
       return percentage;
     }
     return 0.0;
+  }
+   dynamic getDetailValue(String detailKey, String? alternativeKey) {
+    return widget.predictionResponse?["details"][detailKey] ?? widget.predictionResponse?["details"][alternativeKey];
   }
 
   @override
@@ -174,7 +167,7 @@ class _DetectionViewState extends State<DetectionView> {
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Text(
-                        '${widget.predictionResponse?["value"] ?? "N/A"}',
+                        moneda,
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 14.0,
@@ -193,7 +186,7 @@ class _DetectionViewState extends State<DetectionView> {
             height: 96,
             alignment: Alignment.centerLeft,
             decoration: BoxDecoration(
-              color: veracity == 'Verdadero'
+              color: veracity == 'verdadero'
                   ? const Color.fromRGBO(32, 136, 103, 1)
                   : const Color.fromRGBO(217, 97, 100, 1),
               borderRadius: const BorderRadius.only(
@@ -357,7 +350,7 @@ class _DetectionViewState extends State<DetectionView> {
                                 child: ClipRRect(
                                   borderRadius: const BorderRadius.all(Radius.circular(10)),
                                   child: LinearProgressIndicator(
-                                    value: details["marca_de_agua"],
+                                    value:details["marca_de_agua"],
                                     backgroundColor: dark[100],
                                     color: alternative[300],
                                   ),
@@ -456,7 +449,7 @@ class _DetectionViewState extends State<DetectionView> {
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    details["numero_oculto"] != null? "Número oculto": "Spark Live",
+                                    details["numero_ocultos"] != null? "Número oculto": "Figuras en Movimiento",
                                     style: TextStyle(
                                       color: dark[200],
                                       fontWeight: FontWeight.w400,
@@ -464,7 +457,7 @@ class _DetectionViewState extends State<DetectionView> {
                                     ),
                                   ),
                                   Text(
-                                    formatPercentage(details["numero_oculto"] ?? details["figuras_en_movimiento"]),
+                                    formatPercentage(getDetailValue("numero_oculto", "figuras_en_movimiento")),
                                     style: TextStyle(
                                       color: dark[400],
                                       fontWeight: FontWeight.w400,
@@ -498,7 +491,10 @@ class _DetectionViewState extends State<DetectionView> {
                   ),
                 ],
                 expansionCallback: (i, isOpen) => setState(() =>
-                _isOpen = !isOpen
+                
+                _isOpen = !_isOpen
+               
+
                 ),
               ),
             ), 
