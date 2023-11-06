@@ -109,9 +109,10 @@ class _DetectionViewState extends State<DetectionView> {
     String moneda = getMoneda();
     String percentage = formatPercentage(widget.predictionResponse?["percentage"]);
     double perValue = percentageValue(widget.predictionResponse);
-    var edition = widget.predictionResponse?["edition"];
+    //var edition = widget.predictionResponse?["edition"];
     String veracity = widget.predictionResponse?["prediction"];
     var details = widget.predictionResponse?["details"];
+    var edition = details["numero_oculto"] != null? "2009": "2021";
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -365,7 +366,7 @@ class _DetectionViewState extends State<DetectionView> {
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    "Micro impresiones",
+                                    "Microimpresiones",
                                     style: TextStyle(
                                       color: dark[200],
                                       fontWeight: FontWeight.w400,
@@ -449,7 +450,7 @@ class _DetectionViewState extends State<DetectionView> {
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    details["numero_ocultos"] != null? "Número oculto": "Figuras en Movimiento",
+                                    details["numero_oculto"] != null? "Número oculto": "Spark Live",
                                     style: TextStyle(
                                       color: dark[200],
                                       fontWeight: FontWeight.w400,
@@ -532,7 +533,7 @@ class _DetectionViewState extends State<DetectionView> {
                     ),
                   ),
           ),
-          const SizedBox(height: 80.0),
+          const SizedBox(height: 60.0),
         ]),
       ),
     );

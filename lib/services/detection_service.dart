@@ -11,7 +11,7 @@ Future<Map<String, dynamic>> saveDetection(
   String imageUrl
   ) async {
 
-  var url = Uri.parse('http://20.114.81.59:8000/detections');
+  var url = Uri.parse('http://safycash-api.aadac9d6h9ccgtdz.eastus.azurecontainer.io:8000/detections');
   String? userId = Auth().currentUser?.uid;
 
   var now = DateTime.now();
@@ -45,17 +45,18 @@ Future<Map<String, dynamic>> saveDetection(
 
 Future<List<Map<String, dynamic>>> listDetectionsByUser() async {
   String? userId = Auth().currentUser?.uid;
-  
-  var url = Uri.parse('http://20.114.81.59:8000/detections/user/$userId');
-
+  //print(userId);
+  var url = Uri.parse('http://safycash-api.aadac9d6h9ccgtdz.eastus.azurecontainer.io:8000/detections/user/$userId');
+  print("Si llego hasta el service y se hará la petición");
   final response = await http.get(
     url,
     headers: {
       'Content-Type': 'application/json',
     },
   );
-
+  //print("Ya está la respuesta");
   if (response.statusCode == 200) {
+    //print("La respuesta fue poritiva");
     List<dynamic> jsonResponse = json.decode(response.body);
     List<Map<String, dynamic>> result = jsonResponse.map((data) {
       return Map<String, dynamic>.from(data);
@@ -73,7 +74,7 @@ Future<String> deleteDetection(
   ) async {
 
   String? userId = Auth().currentUser?.uid;
-  var url = Uri.parse('http://20.114.81.59:8000/detections/user/$userId/$detectionId');
+  var url = Uri.parse('http://safycash-api.aadac9d6h9ccgtdz.eastus.azurecontainer.io:8000/detections/user/$userId/$detectionId');
 
   final response = await http.delete(
     url,

@@ -63,6 +63,9 @@ class _CameraFunctionalityViewState extends State<CameraFunctionalityView> {
         print('Error predicting image: $e');
       }
     }
+    setState(() {
+      appData.showNavBar = false;
+    });
   }
 
   Future<void> _getImageFromGallery() async {
@@ -91,21 +94,10 @@ class _CameraFunctionalityViewState extends State<CameraFunctionalityView> {
           }
         };*/
 
-        /*var predictionResponse = {
-          "edition": 2009,
-          "value": "20 soles",
-          "prediction": "falso",
-          "percentage": 0.6865,
-          "details": {
-            'marca_de_aguas': 0.7792073488235474,
-            'microimpresioness': 0.7578911185264587,
-            'numero_ocultos': 0.20,
-            'hilo_de_seguridads': 0.7831177115440369, 
-          }
-        };*/
         setState(() {
           _prediction = predictionResponse;
           isLoading = false;
+          appData.showNavBar = false;
         });
         print("Llego a hacer el request");
         File imageFile = File(pickedImage.path);
@@ -114,6 +106,9 @@ class _CameraFunctionalityViewState extends State<CameraFunctionalityView> {
         print('Error predicting image: $e');
       }
     }
+    setState(() {
+      appData.showNavBar = false;
+    });
   }
 
   Future<void> _predictImage(String imagePath) async {
